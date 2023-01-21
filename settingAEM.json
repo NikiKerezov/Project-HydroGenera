@@ -1,0 +1,36 @@
+{
+	"communication_protocol":{
+		"circuit":"UART",
+		"visualisation":"WebSocket",
+		"server":"WebSocket"
+	},
+
+	"generator_setting":{
+		"cell_count":8,
+		"id":0,
+		"uin_chip":"A1282Ea"
+	},
+
+	"log_settings":{
+		"log_type":"Console",
+		"log_level":3
+	},
+
+	"local_data_settings":{
+		"data_lifespan":7, //in days
+		"file_format":"csv"
+	},
+
+	"uart_setting":{
+		"port":"/dev/ttyUSB0",
+		"baudRate": 9600,
+		"dataBits": 8,
+		"stopBits": 1,
+		"parity": "none"
+	},
+
+	"server_settings":{
+		"url":"192.168.0.1:8080"
+	}
+
+}

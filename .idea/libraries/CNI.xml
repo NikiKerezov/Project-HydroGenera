@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="CNI">
+    <CLASSES />
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../Compressed/rxtx-2.1-7r2/rxtx-2.1-7r2/CNI" />
+      <root url="file://$PROJECT_DIR$/../Compressed/rxtx-2.1-7r2/rxtx-2.1-7r2/contrib" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,3 +1,8 @@
+package Main;
+
+import LocalData.DataPackage;
+import LocalData.SaveToFile;
+
 public class Main {
     public static void main(String[] args) {
         DataPackage data = new DataPackage(10, "nz", 1, 2, 3, 4, 5);

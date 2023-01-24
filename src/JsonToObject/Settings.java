@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 
-public class JsonToJava {
+public class Settings {
     public static void main(String[] args) throws Exception {
         // create object mapper
         ObjectMapper mapper = new ObjectMapper();
@@ -16,6 +16,6 @@ public class JsonToJava {
         // print object data
         System.out.println(data.getCommunicationProtocol().getCircuit());
         System.out.println(data.getGeneratorSetting().getCellCount());
-
+        System.out.println(data.getServerSettings().getUrl());
     }
 }

@@ -1,11 +1,14 @@
-package DependancyContainer;
+package DependancyContainer.Services;
 
 import java.io.File;
 import java.io.IOException;
+
+import DependancyContainer.Contracts.IJsonReader;
+import DependancyContainer.Services.Data;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
-public class JsonReader implements IJsonReader{
+public class JsonReader implements IJsonReader {
     private ObjectMapper mapper;
 
     public JsonReader() {

@@ -1,6 +1,9 @@
-package DependancyContainer;
+package DependancyContainer.Services;
 
-public class Data implements IData{
+import DependancyContainer.Contracts.IData;
+import DependancyContainer.Models.*;
+
+public class Data implements IData {
     private CommunicationProtocol communicationProtocol;
     private GeneratorSetting generatorSetting;
     private LogSettings logSettings;

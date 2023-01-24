@@ -1,4 +1,4 @@
-package LocalData;
+package LocalData.Models;
 
 public class CSVUtils{
     public static String toCSV(DataPackage dataPackage) {

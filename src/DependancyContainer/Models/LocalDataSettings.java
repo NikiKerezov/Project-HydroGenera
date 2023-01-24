@@ -1,4 +1,4 @@
-package DependancyContainer;
+package DependancyContainer.Models;
 
 public class LocalDataSettings {
     private int dataLifespan;

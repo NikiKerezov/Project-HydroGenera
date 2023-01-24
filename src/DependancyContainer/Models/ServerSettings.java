@@ -1,4 +1,4 @@
-package DependancyContainer;
+package DependancyContainer.Models;
 
 public class ServerSettings {
     private String url;

@@ -1,4 +1,4 @@
-package LocalData;
+package LocalData.Models;
 
 public class DataPackage {
     private double amp, tmp, bar, uin, pwm;
@@ -26,9 +26,9 @@ public class DataPackage {
         this.boardId = boardId;
     }
 
-   /* public static LocalData.DataPackage getInstance(int adr, String timestamp, double amp, double tmp, double pwm, double bar, double uin) {
+   /* public static LocalData.Models.DataPackage getInstance(int adr, String timestamp, double amp, double tmp, double pwm, double bar, double uin) {
         if (instance == null) {
-            instance = new LocalData.DataPackage(adr, timestamp, amp, tmp, pwm, bar, uin);
+            instance = new LocalData.Models.DataPackage(adr, timestamp, amp, tmp, pwm, bar, uin);
         }
         return instance;
     }*/

@@ -1,4 +1,4 @@
-package DependancyContainer;
+package DependancyContainer.Models;
 
 public class UartSetting {
     private String port;

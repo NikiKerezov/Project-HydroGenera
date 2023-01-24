@@ -1,4 +1,8 @@
-package LocalData;
+package LocalData.Services;
+
+import LocalData.Contracts.ISaveToFile;
+import LocalData.Models.CSVUtils;
+import LocalData.Models.DataPackage;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -53,20 +57,6 @@ public class SaveToFile implements ISaveToFile {
             e.printStackTrace();
         }
     }
-
-   /* private static void checkAndDeleteOldFiles(File directory) {
-        long currentTime = System.currentTimeMillis();
-        long aWeekAgo = currentTime - (7 * 24 * 60 * 60 * 1000);
-        File[] files = directory.listFiles();
-        if (files == null) {
-            return;
-        }
-        for (File file : files) {
-            if (file.lastModified() < aWeekAgo) {
-                file.delete();
-            }
-        }
-    }*/
 
     //parsing the timestamp from the file name and comparing it to current time
     private static void checkAndDeleteOldFiles(File directory) {

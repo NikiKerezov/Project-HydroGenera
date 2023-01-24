@@ -1,4 +1,6 @@
-package DependancyContainer;
+package DependancyContainer.Contracts;
+
+import DependancyContainer.Models.*;
 
 public interface IData {
     CommunicationProtocol getCommunicationProtocol();

@@ -1,7 +1,7 @@
-package Main;
+package LocalData;
 
-import LocalData.DataPackage;
-import LocalData.SaveToFile;
+import LocalData.Models.DataPackage;
+import LocalData.Services.SaveToFile;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Main {

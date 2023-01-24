@@ -1,4 +1,4 @@
-package JsonToObject;
+package DependancyContainer;
 
 public class ServerSettings {
     private String url;

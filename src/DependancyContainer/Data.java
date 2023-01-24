@@ -1,4 +1,4 @@
-package JsonToObject;
+package DependancyContainer;
 
 public class Data implements IData{
     private CommunicationProtocol communicationProtocol;

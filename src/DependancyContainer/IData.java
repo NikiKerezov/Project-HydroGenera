@@ -1,4 +1,4 @@
-package JsonToObject;
+package DependancyContainer;
 
 public interface IData {
     CommunicationProtocol getCommunicationProtocol();

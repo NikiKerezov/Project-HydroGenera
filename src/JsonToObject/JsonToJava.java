@@ -14,6 +14,8 @@ public class JsonToJava {
         Data data = mapper.readValue(jsonFile, Data.class);
 
         // print object data
-        System.out.println(data);
+        System.out.println(data.getCommunicationProtocol().getCircuit());
+        System.out.println(data.getGeneratorSetting().getCellCount());
+
     }
 }

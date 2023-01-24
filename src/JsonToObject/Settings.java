@@ -17,5 +17,7 @@ public class Settings {
         System.out.println(data.getCommunicationProtocol().getCircuit());
         System.out.println(data.getGeneratorSetting().getCellCount());
         System.out.println(data.getServerSettings().getUrl());
+        System.out.println(data.getCommunicationProtocol().getServer());
+        System.out.println(data.getLocalDataSettings().getDataLifespan());
     }
 }

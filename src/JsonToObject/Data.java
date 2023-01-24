@@ -1,6 +1,6 @@
 package JsonToObject;
 
-public class Data {
+public class Data implements IData{
     private CommunicationProtocol communicationProtocol;
     private GeneratorSetting generatorSetting;
     private LogSettings logSettings;

@@ -1,16 +1,16 @@
-package Processor;
+package Processor.Services;
 
 import LocalData.Models.DataPackage;
 
 import java.util.ArrayList;
 
-public class CreateDataPackage {
+public class ProcessPackage {
 
-    private static final CreateDataPackage instance = new CreateDataPackage();
+    private static final ProcessPackage instance = new ProcessPackage();
 
-    private CreateDataPackage() {}
+    private ProcessPackage() {}
 
-    public static CreateDataPackage getInstance() {
+    public static ProcessPackage getInstance() {
         return instance;
     }
 

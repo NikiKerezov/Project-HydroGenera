@@ -1,4 +1,4 @@
-package Processor;
+package Processor.Services;
 
 import com.fazecast.jSerialComm.SerialPort;
 
@@ -58,7 +58,7 @@ public class ReadFromSerialPort {//naming, DI, singleton
                     if (input.size() == 16 && input.get(14) == 0x0a && input.get(15) == 0x0d) {//?is it enough
                         //input[15] = 0a
                         //input[14] = 0d
-                        System.out.println(CreateDataPackage.getInstance().createPackage(input).toString());
+                        System.out.println(ProcessPackage.getInstance().createPackage(input).toString());
                         input.clear();
                     }
 

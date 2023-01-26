@@ -17,10 +17,12 @@ public class ReadFromSerialPort {//naming, DI, singleton
     private static final String PORT_NAME = "COM8";
 
     private ReadFromSerialPort() {
-        //TODO: PORT_NAME = getPortName from settings etc
+
     }
 
-    public static void readFromCom() {//?flush port
+    public void ReadFromSerialPort() {//?flush port
+
+        //TODO: PORT_NAME = getPortName from settings etc
 
         SerialPort serialPort = SerialPort.getCommPort("COM3");
         //serialPort.setComPortParameters(9600, 8, 1, 0);

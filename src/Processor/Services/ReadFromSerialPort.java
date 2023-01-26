@@ -1,5 +1,7 @@
 package Processor.Services;
 
+import Processor.Contracts.IProcessPackage;
+import Processor.Utils.printDataPackage;
 import com.fazecast.jSerialComm.SerialPort;
 
 import java.io.InputStream;
@@ -9,6 +11,9 @@ public class ReadFromSerialPort {//naming, DI, singleton
     //initiate the serial port
 
     private static final ReadFromSerialPort instance = new ReadFromSerialPort();
+
+    private IProcessPackage processPackage;
+    private printDataPackage printDataPackage;
 
     public static ReadFromSerialPort getInstance() {
         return instance;
@@ -25,7 +30,7 @@ public class ReadFromSerialPort {//naming, DI, singleton
         //TODO: PORT_NAME = getPortName from settings etc
 
         SerialPort serialPort = SerialPort.getCommPort("COM3");
-        //serialPort.setComPortParameters(9600, 8, 1, 0);
+        serialPort.setComPortParameters(9600, 8, 1, 0);
 
         SerialPort[] arrayOfSerialPort = SerialPort.getCommPorts();
 
@@ -58,7 +63,7 @@ public class ReadFromSerialPort {//naming, DI, singleton
                     if (input.size() == 16 && input.get(14) == 0x0a && input.get(15) == 0x0d) {//?is it enough
                         //input[15] = 0a
                         //input[14] = 0d
-                        System.out.println(ProcessPackage.getInstance().createPackage(input).toString());
+                        printDataPackage.printPackage(processPackage.processPackage(input));
                         input.clear();
                     }
 

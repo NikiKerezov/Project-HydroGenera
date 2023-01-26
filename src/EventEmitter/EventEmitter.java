@@ -1,5 +1,7 @@
 package EventEmitter;
 
+import LocalData.Models.DataPackage;
+
 import java.util.ArrayList;
 
 public class EventEmitter {
@@ -15,13 +17,23 @@ public class EventEmitter {
     private final ArrayList<Observer> observers = new ArrayList<Observer>();
     private int state;
 
+    private DataPackage dataPackage;
+
+    public DataPackage getDataPackage() {
+        return dataPackage;
+    }
+
+    public void setDataPackage(DataPackage dataPackage) {
+        this.dataPackage = dataPackage;
+    }
+
     public int getState() {
         return state;
     }
 
-    public void setState(int state) {
+    public void setState(int state, DataPackage dataPackage) {
         this.state = state;
-        notifyAllObservers();
+        notifyAllObservers(dataPackage);
     }
 
     public void attach(Observer observer){
@@ -32,9 +44,9 @@ public class EventEmitter {
         observers.remove(observer);
     }
 
-    public void notifyAllObservers(){
+    public void notifyAllObservers(DataPackage dataPackage){
         for (Observer observer : observers) {
-            observer.update();
+            observer.update(dataPackage);
         }
     }
 }

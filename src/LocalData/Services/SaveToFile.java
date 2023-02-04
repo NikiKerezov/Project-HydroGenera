@@ -1,8 +1,11 @@
 package LocalData.Services;
 
+import EventEmitter.EventEmitter;
+import EventEmitter.Observer;
 import LocalData.Contracts.ISaveToFile;
 import LocalData.Models.DataPackage;
 
+import javax.security.auth.Subject;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -11,7 +14,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class SaveToFile implements ISaveToFile {
+public class SaveToFile extends Observer implements ISaveToFile {
     private static String pathFiles = "D:\\COMPortData\\";
     private static SaveToFile instance;
     public static SaveToFile getInstance() {
@@ -20,14 +23,23 @@ public class SaveToFile implements ISaveToFile {
         }
         return instance;
     }
+
+    public SaveToFile(EventEmitter eventEmitter){
+        this.eventEmitter = eventEmitter;
+        this.eventEmitter.attach(this);
+    }
     private SaveToFile() {
     }
 
     public static void setPathFiles(String pathFiles) {
         SaveToFile.pathFiles = pathFiles;
     }
+    @Override
+    public void update(DataPackage dataPackage){
+        SaveToCsv(dataPackage);
+    }
 
-    public void saveDataPackageToFile(DataPackage dataPackage) {
+    public void SaveToCsv(DataPackage dataPackage) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
         String currentTimestamp = sdf.format(new Date());
         String fileName = "timestamp" + currentTimestamp + ".csv";

@@ -1,7 +1,8 @@
-package ServerCommunication;
+package ServerCommunication.Contract;
 
 import EventEmitter.Observer;
 import LocalData.Models.DataPackage;
+import ServerCommunication.Service.IServerConnection;
 import io.socket.client.IO;
 import io.socket.client.Socket;
 

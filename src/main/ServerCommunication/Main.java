@@ -1,6 +1,7 @@
 package ServerCommunication;
 
 import LocalData.Models.DataPackage;
+import ServerCommunication.Contract.WebSocketConnection;
 
 import java.net.URISyntaxException;
 

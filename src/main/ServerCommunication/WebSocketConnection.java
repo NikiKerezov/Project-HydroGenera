@@ -2,7 +2,6 @@ package ServerCommunication;
 
 import EventEmitter.Observer;
 import LocalData.Models.DataPackage;
-import LocalData.Services.SaveToFile;
 import io.socket.client.IO;
 import io.socket.client.Socket;
 
@@ -24,6 +23,6 @@ public class WebSocketConnection extends Observer implements IServerConnection {
 
     @Override
     public void update(DataPackage dataPackage) {
-        this.sendPackage(dataPackage);
+        sendPackage(dataPackage);
     }
 }

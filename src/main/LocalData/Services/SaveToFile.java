@@ -15,25 +15,25 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class SaveToFile extends Observer implements ISaveToFile {
-    private static String pathFiles = "D:\\COMPortData\\";
+    private String pathFiles;
     private static SaveToFile instance;
+    private int lifespan_in_days;
+    
+    public static void setInstance(String path, int lifespan_in_days){
+        instance = new SaveToFile(path, lifespan_in_days);
+    }
     public static SaveToFile getInstance() {
         if (instance == null) {
-            instance = new SaveToFile();
+            throw new Exception("instance was forgotten to be initialized");
         }
         return instance;
     }
 
-    public SaveToFile(EventEmitter eventEmitter){
-        this.eventEmitter = eventEmitter;
-        this.eventEmitter.attach(this);
-    }
-    private SaveToFile() {
+    private SaveToFile(String path, int lifespan_in_days) {
+        this.lifespan_in_days = lifespan_in_days;
+        this.pathFiles = path;
     }
 
-    public static void setPathFiles(String pathFiles) {
-        SaveToFile.pathFiles = pathFiles;
-    }
     @Override
     public void update(DataPackage dataPackage){
         SaveToCsv(dataPackage);
@@ -70,9 +70,9 @@ public class SaveToFile extends Observer implements ISaveToFile {
     }
 
     //parsing the timestamp from the file name and comparing it to current time
-    private static void checkAndDeleteOldFiles(File directory) {
+    private void checkAndDeleteOldFiles(File directory) {
         long currentTime = System.currentTimeMillis();
-        long lifespan = currentTime - (7 * 24 * 60 * 60 * 1000);
+        long lifespan = currentTime - (lifespan_in_days * 24 * 60 * 60 * 1000);
         File[] files = directory.listFiles();
         if (files == null) {
             return;

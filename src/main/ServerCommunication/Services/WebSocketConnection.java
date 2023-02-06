@@ -1,4 +1,4 @@
-package ServerCommunication.Contract;
+package ServerCommunication.Services;
 
 import EventEmitter.Observer;
 import LocalData.Models.DataPackage;
@@ -10,10 +10,22 @@ import java.net.URISyntaxException;
 
 public class WebSocketConnection extends Observer implements IServerConnection {
 
-    final Socket socket;
+    private final Socket socket;
+    private static WebSocketConnection instance;
 
-    public WebSocketConnection() throws URISyntaxException {
-        socket = IO.socket("ws://socket.statistics.green-innovation.bg");
+    public static void setInstance(String url){
+        instance = WebSocketConnection(url);
+    }
+
+    public static WebSocketConnection getInstance(){
+        if (instance == null) {
+            throw new Exception("instance was forgotten to be initialized");
+        }
+        return instance;
+    }
+
+    private WebSocketConnection(String url) throws URISyntaxException {
+        socket = IO.socket(url);
         socket.on(Socket.EVENT_CONNECT, objects -> {
             System.out.println(objects);
         });
@@ -26,7 +38,6 @@ public class WebSocketConnection extends Observer implements IServerConnection {
     @Override
     public void sendPackage(DataPackage dataPackage) {
         socket.emit("test", "as");
-        //socket.close();
     }
 
     @Override

@@ -1,4 +1,4 @@
-package ServerCommunication.Service;
+package ServerCommunication.Contracts;
 
 import LocalData.Models.DataPackage;
 

@@ -7,25 +7,31 @@ import com.fazecast.jSerialComm.SerialPort;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-public class ReadFromSerialPort {//naming, DI, singleton
-    //initiate the serial port
+public class ReadFromSerialPort {
 
-    private static final ReadFromSerialPort instance = new ReadFromSerialPort();
+    private static ReadFromSerialPort instance;
 
     private IProcessPackage processPackage;
     private printDataPackage printDataPackage;
+    private String PORT_NAME;
+
+    public static void setInstance(IProcessPackage processPackage, String port){
+        instance = new ReadFromSerialPort(processPackage, port);
+    }
 
     public static ReadFromSerialPort getInstance() {
+        if (instance == null) {
+            throw new Exception("instance was forgotten to be initialized");
+        }
         return instance;
     }
 
-    private static final String PORT_NAME = "COM8";
-
-    private ReadFromSerialPort() {
-
+    private ReadFromSerialPort(IProcessPackage processPackage, String port) {
+        this.processPackage = processPackage;
+        this.PORT_NAME = port;
     }
 
-    public void ReadFromSerialPort() {//?flush port
+    public void ReadAndProcess() {//?flush port
 
         //TODO: PORT_NAME = getPortName from settings etc
 
@@ -60,7 +66,10 @@ public class ReadFromSerialPort {//naming, DI, singleton
                     Character numRead = (char) in.read();
                     input.add(numRead);
 
-                    if (input.size() == 16 && input.get(14) == 0x0a && input.get(15) == 0x0d) {//?is it enough
+                    if (input.size() == 16 
+                        && input.get(14) == 0x0a 
+                        && input.get(15) == 0x0d) {
+                            
                         //input[15] = 0a
                         //input[14] = 0d
                         printDataPackage.printPackage(processPackage.processPackage(input));

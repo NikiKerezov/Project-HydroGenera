@@ -37,7 +37,7 @@ public class WebSocketConnection extends Observer implements IServerConnection {
 
     @Override
     public void sendPackage(DataPackage dataPackage) {
-        socket.emit("test", "as");
+        socket.emit("new_data", dataPackage);
     }
 
     @Override

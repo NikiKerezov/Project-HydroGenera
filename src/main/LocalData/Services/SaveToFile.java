@@ -21,6 +21,8 @@ public class SaveToFile extends Observer implements ISaveToFile {
     
     public static void setInstance(String path, int lifespan_in_days){
         instance = new SaveToFile(path, lifespan_in_days);
+        //Create new file
+        //Delete old files
     }
     public static SaveToFile getInstance() {
         if (instance == null) {

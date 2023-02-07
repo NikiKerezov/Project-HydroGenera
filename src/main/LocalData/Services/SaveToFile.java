@@ -1,11 +1,9 @@
 package LocalData.Services;
 
-import EventEmitter.EventEmitter;
 import EventEmitter.Observer;
 import LocalData.Contracts.ISaveToFile;
 import LocalData.Models.DataPackage;
 
-import javax.security.auth.Subject;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -15,14 +13,19 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class SaveToFile extends Observer implements ISaveToFile {
-    private String pathFiles;
+    private final String pathFiles;
     private static SaveToFile instance;
-    private int lifespan_in_days;
+    private final long lifespan_in_days;
+    private static File directory;
+    private File file;
     
     public static void setInstance(String path, int lifespan_in_days){
         instance = new SaveToFile(path, lifespan_in_days);
+        //create new files
+        instance.createFile();
+        instance.checkAndDeleteOldFiles(directory);
     }
-    public static SaveToFile getInstance() {
+    public static SaveToFile getInstance() throws Exception {
         if (instance == null) {
             throw new Exception("instance was forgotten to be initialized");
         }
@@ -39,17 +42,19 @@ public class SaveToFile extends Observer implements ISaveToFile {
         SaveToCsv(dataPackage);
     }
 
-    public void SaveToCsv(DataPackage dataPackage) {
+    public void createFile(){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
         String currentTimestamp = sdf.format(new Date());
         String fileName = "timestamp" + currentTimestamp + ".csv";
-        File directory = new File(pathFiles);
+        directory = new File(pathFiles);
         if (!directory.exists()) {
             directory.mkdir();
         }
-        File file = new File(directory, fileName);
-        checkAndDeleteOldFiles(directory);
+        file = new File(directory, fileName);
+        //checkAndDeleteOldFiles(directory);
+    }
 
+    public void SaveToCsv(DataPackage dataPackage) {
         while (file.exists()) {
             String name = file.getName();
             int dotIndex = name.lastIndexOf(".");

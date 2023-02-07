@@ -19,7 +19,7 @@ public class ReadFromSerialPort {
         instance = new ReadFromSerialPort(processPackage, port);
     }
 
-    public static ReadFromSerialPort getInstance() {
+    public static ReadFromSerialPort getInstance() throws Exception {
         if (instance == null) {
             throw new Exception("instance was forgotten to be initialized");
         }

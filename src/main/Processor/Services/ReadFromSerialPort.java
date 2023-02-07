@@ -35,7 +35,7 @@ public class ReadFromSerialPort {
 
         //TODO: PORT_NAME = getPortName from settings etc
 
-        SerialPort serialPort = SerialPort.getCommPort("COM3");
+        SerialPort serialPort = SerialPort.getCommPort(PORT_NAME);
         serialPort.setComPortParameters(9600, 8, 1, 0);
 
         SerialPort[] arrayOfSerialPort = SerialPort.getCommPorts();
@@ -73,6 +73,7 @@ public class ReadFromSerialPort {
                         //input[15] = 0a
                         //input[14] = 0d
                         printDataPackage.printPackage(processPackage.processPackage(input));
+                        //Emit packet
                         input.clear();
                     }
 

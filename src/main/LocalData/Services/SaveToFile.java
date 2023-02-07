@@ -27,7 +27,7 @@ public class SaveToFile extends Observer implements ISaveToFile {
     }
     public static SaveToFile getInstance() throws Exception {
         if (instance == null) {
-            throw new Exception("instance was forgotten to be initialized");
+            throw new Exception("SaveToFile is not initialized");
         }
         return instance;
     }

@@ -1,7 +1,8 @@
+/*
 package ServerCommunication;
 
 import LocalData.Models.DataPackage;
-import ServerCommunication.Contract.WebSocketConnection;
+import ServerCommunication.Services.WebSocketConnection;
 
 import java.net.URISyntaxException;
 
@@ -11,3 +12,4 @@ public class Main {
         wsc.sendPackage(new DataPackage(4,"a",4,4, 5, 5, 5));
     }
 }
+*/

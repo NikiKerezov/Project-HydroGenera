@@ -38,7 +38,7 @@ public class ReadFromSerialPort extends Observer {
 
         //TODO: PORT_NAME = getPortName from settings etc
 
-        SerialPort serialPort = SerialPort.getCommPort("COM3");
+        SerialPort serialPort = SerialPort.getCommPort(PORT_NAME);
         serialPort.setComPortParameters(9600, 8, 1, 0);
 
         SerialPort[] arrayOfSerialPort = SerialPort.getCommPorts();
@@ -69,12 +69,7 @@ public class ReadFromSerialPort extends Observer {
                             
                         //input[15] = 0a
                         //input[14] = 0d
-
-                        DataPackage dataPackage = processPackage.processPackage(input);
-
-                        EventEmitter.getInstance().setDataPackage(dataPackage);
-                        EventEmitter.getInstance().notifyAllObservers(dataPackage);
-
+                        printDataPackage.printPackage(processPackage.processPackage(input));
                         input.clear();
                     }
 

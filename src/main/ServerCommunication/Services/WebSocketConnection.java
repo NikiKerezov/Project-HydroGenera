@@ -2,7 +2,7 @@ package ServerCommunication.Services;
 
 import EventEmitter.Observer;
 import LocalData.Models.DataPackage;
-import ServerCommunication.Service.IServerConnection;
+import ServerCommunication.Contracts.IServerConnection;
 import io.socket.client.IO;
 import io.socket.client.Socket;
 
@@ -13,18 +13,23 @@ public class WebSocketConnection extends Observer implements IServerConnection {
     private final Socket socket;
     private static WebSocketConnection instance;
 
-    public static void setInstance(String url){
-        instance = WebSocketConnection(url);
+    public WebSocketConnection(Socket socket) {
+
+        this.socket = socket;
     }
 
-    public static WebSocketConnection getInstance(){
+    public static void setInstance(String url) throws URISyntaxException {
+        instance = new WebSocketConnection(url);
+    }
+
+    public static WebSocketConnection getInstance() throws Exception {
         if (instance == null) {
             throw new Exception("instance was forgotten to be initialized");
         }
         return instance;
     }
 
-    private WebSocketConnection(String url) throws URISyntaxException {
+    public WebSocketConnection(String url) throws URISyntaxException {
         socket = IO.socket(url);
         socket.on(Socket.EVENT_CONNECT, objects -> {
             System.out.println(objects);

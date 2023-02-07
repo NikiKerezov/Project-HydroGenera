@@ -105,7 +105,8 @@ public class ProcessPackage {
 
         double tmp = data.get(0);
 
-        //return new DataPackage(amp, tmp, pwm, bar, uin);
-        return null;
+        String timestamp = String.valueOf(System.currentTimeMillis());
+
+        return new DataPackage(address, timestamp, amp, tmp, pwm, bar, uin);
     }
 }

@@ -1,5 +1,8 @@
 package Processor.Services;
 
+import EventEmitter.EventEmitter;
+import EventEmitter.Observer;
+import LocalData.Models.DataPackage;
 import Processor.Contracts.IProcessPackage;
 import Processor.Utils.printDataPackage;
 import com.fazecast.jSerialComm.SerialPort;
@@ -7,7 +10,7 @@ import com.fazecast.jSerialComm.SerialPort;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-public class ReadFromSerialPort {
+public class ReadFromSerialPort extends Observer {
 
     private static ReadFromSerialPort instance;
 
@@ -19,9 +22,9 @@ public class ReadFromSerialPort {
         instance = new ReadFromSerialPort(processPackage, port);
     }
 
-    public static ReadFromSerialPort getInstance() {
+    public static ReadFromSerialPort getInstance() throws Exception {
         if (instance == null) {
-            throw new Exception("instance was forgotten to be initialized");
+            throw new Exception("ReadFromSerialPort is not initialized");
         }
         return instance;
     }
@@ -43,13 +46,7 @@ public class ReadFromSerialPort {
         for (SerialPort port : arrayOfSerialPort) {
             System.out.println(port.getSystemPortName());
         }
-/*
-        try {
-            serialPort
-        } catch (Exception e) {
-            throw new RuntimeException("Port is not open");
-        }
-*/
+
         while (true) {
             serialPort.openPort();
             InputStream in = serialPort.getInputStream();
@@ -73,7 +70,6 @@ public class ReadFromSerialPort {
                         //input[15] = 0a
                         //input[14] = 0d
                         printDataPackage.printPackage(processPackage.processPackage(input));
-                        //Emit packet
                         input.clear();
                     }
 
@@ -84,4 +80,8 @@ public class ReadFromSerialPort {
         }
     }
 
+    @Override
+    public void update(DataPackage dataPackage) {
+        ReadAndProcess();
+    }
 }

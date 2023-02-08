@@ -53,11 +53,6 @@ public class WebServer extends Observer implements IWebServer {
         return instance;
     }
 
-
-    public static void main(String[] args) throws InterruptedException {
-
-    }
-
     @Override
     public void update(DataPackage dataPackage) {
 

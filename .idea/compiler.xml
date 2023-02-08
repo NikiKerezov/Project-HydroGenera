@@ -6,10 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="Project-HydroGenera" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="LocalData4" target="18" />
+      <module name="Project-HydroGenera" target="18" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

@@ -12,34 +12,34 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class SaveToFile extends Observer implements ISaveToFile {
+public class SaveToCsv extends Observer implements ISaveToFile {
     private final String pathFiles;
-    private static SaveToFile instance;
+    private static SaveToCsv instance;
     private final long lifespan_in_days;
     private static File directory;
     private File file;
     
     public static void setInstance(String path, int lifespan_in_days){
-        instance = new SaveToFile(path, lifespan_in_days);
+        instance = new SaveToCsv(path, lifespan_in_days);
         //create new files
         instance.createFile();
         instance.checkAndDeleteOldFiles(directory);
     }
-    public static SaveToFile getInstance() throws Exception {
+    public static SaveToCsv getInstance() throws Exception {
         if (instance == null) {
             throw new Exception("SaveToFile is not initialized");
         }
         return instance;
     }
 
-    private SaveToFile(String path, int lifespan_in_days) {
+    private SaveToCsv(String path, int lifespan_in_days) {
         this.lifespan_in_days = lifespan_in_days;
         this.pathFiles = path;
     }
 
     @Override
     public void update(DataPackage dataPackage){
-        SaveToCsv(dataPackage);
+        SaveToFile(dataPackage);
     }
 
     public void createFile(){
@@ -54,7 +54,7 @@ public class SaveToFile extends Observer implements ISaveToFile {
         //checkAndDeleteOldFiles(directory);
     }
 
-    public void SaveToCsv(DataPackage dataPackage) {
+    public void SaveToFile(DataPackage dataPackage) {
         while (file.exists()) {
             String name = file.getName();
             int dotIndex = name.lastIndexOf(".");

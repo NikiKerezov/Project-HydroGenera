@@ -10,7 +10,7 @@ import com.fazecast.jSerialComm.SerialPort;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-public class ReadFromSerialPort extends Observer {
+public class ReadFromSerialPort {
 
     private static ReadFromSerialPort instance;
 
@@ -69,7 +69,11 @@ public class ReadFromSerialPort extends Observer {
                             
                         //input[15] = 0a
                         //input[14] = 0d
-                        printDataPackage.printPackage(processPackage.processPackage(input));
+
+                        DataPackage dataPackage = processPackage.processPackage(input);
+                        EventEmitter.getInstance().setDataPackage(dataPackage);
+                        EventEmitter.getInstance().notifyAllObservers(dataPackage);
+                        
                         input.clear();
                     }
 
@@ -78,10 +82,5 @@ public class ReadFromSerialPort extends Observer {
                     serialPort.closePort();
                 }
         }
-    }
-
-    @Override
-    public void update(DataPackage dataPackage) {
-        ReadAndProcess();
     }
 }

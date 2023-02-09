@@ -5,7 +5,6 @@ import LocalData.Models.DataPackage;
 import java.util.ArrayList;
 
 public class ProcessPackage {
-
     private static final ProcessPackage instance = new ProcessPackage();
 
     private ProcessPackage() {}
@@ -13,6 +12,9 @@ public class ProcessPackage {
     public static ProcessPackage getInstance() {
         return instance;
     }
+
+    private String CONTROLLER_VERSION; //TODO: get from settings
+
 
     private boolean validateData(ArrayList<Character> data) {
         if (data.size() != 16) {
@@ -99,9 +101,17 @@ public class ProcessPackage {
 
         //Calculating Amp
 
-        double amp = (temp  * 0.0048828125 - 0.5859375) / 0.0390625;
+        double amp;
 
-        //Getting Temp
+        if (CONTROLLER_VERSION.equals("1.0")) { //Tuka nz koq tochno trqbva da e zatova sum slojil 1.0
+            amp = (temp  * 0.0048828125 - 0.5859375) / 0.0390625;
+        }
+
+        else {
+            amp = temp / 8;
+        }
+
+        //Getting Temperature
 
         double tmp = data.get(0);
 

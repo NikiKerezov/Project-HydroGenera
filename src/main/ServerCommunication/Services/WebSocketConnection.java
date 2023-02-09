@@ -13,11 +13,6 @@ public class WebSocketConnection extends Observer implements IServerConnection {
     private final Socket socket;
     private static WebSocketConnection instance;
 
-    public WebSocketConnection(Socket socket) {
-
-        this.socket = socket;
-    }
-
     public static void setInstance(String url) throws URISyntaxException {
         instance = new WebSocketConnection(url);
     }

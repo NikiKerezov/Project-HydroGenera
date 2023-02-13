@@ -5,7 +5,7 @@ public class UartSetting {
     private int baudRate;
     private int dataBits;
     private int stopBits;
-    private String parity;
+    private int parity;
 
     public String getPort() {
         return port;
@@ -39,11 +39,11 @@ public class UartSetting {
         this.stopBits = stopBits;
     }
 
-    public String getParity() {
+    public int getParity() {
         return parity;
     }
 
-    public void setParity(String parity) {
+    public void setParity(int parity) {
         this.parity = parity;
     }
 }

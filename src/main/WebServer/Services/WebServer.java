@@ -16,11 +16,15 @@ public class WebServer extends Observer implements IWebServer {
 
     private static WebServer instance;
 
-    public WebServer(String url) throws InterruptedException {
+    private SocketIOServer server;
+    private WebServer() throws InterruptedException {
         Configuration config = new Configuration();
         config.setHostname("localhost");
         config.setPort(9092);
-        final SocketIOServer server = new SocketIOServer(config);
+        server = new SocketIOServer(config);
+    }
+    public void startServer(){
+        server.start();
         server.addEventListener("message", String.class, new DataListener<String>() {
             @Override
             public void onData(SocketIOClient client, String data, AckRequest ackRequest) {
@@ -36,14 +40,9 @@ public class WebServer extends Observer implements IWebServer {
 
             }
         });
-        server.start();
-
-        Thread.sleep(Integer.MAX_VALUE);
-        server.stop();
     }
-
-    public static void setInstance(String url) throws URISyntaxException, InterruptedException {
-        instance = new WebServer(url);
+    public static void setInstance() throws URISyntaxException, InterruptedException {
+        instance = new WebServer();
     }
 
     public static WebServer getInstance() throws Exception {

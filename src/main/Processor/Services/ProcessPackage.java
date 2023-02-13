@@ -1,10 +1,11 @@
 package Processor.Services;
 
 import LocalData.Models.DataPackage;
+import Processor.Contracts.IProcessPackage;
 
 import java.util.ArrayList;
 
-public class ProcessPackage {
+public class ProcessPackage implements IProcessPackage {
 
     private static final ProcessPackage instance = new ProcessPackage();
 
@@ -29,7 +30,7 @@ public class ProcessPackage {
         }
         return true;
     }
-    public DataPackage createPackage(ArrayList<Character> data) {//to be an external class
+    public DataPackage processPackage(ArrayList<Character> data) {//to be an external class
         if (!validateData(data)) {
             throw new IllegalArgumentException("Invalid data");
         }

@@ -8,7 +8,7 @@
   "generatorSetting":{
     "cellCount":8,
     "id":0,
-    "uinChip":"A1282Ea"
+    "uinChip":"A1"
   },
 
   "logSettings":{
@@ -18,7 +18,8 @@
 
   "localDataSettings":{
     "dataLifespan":7, 
-    "fileFormat":"csv"
+    "fileFormat":"csv",
+    "path": "C:\\Users\\golqm\\Documents\\HydroGenera\\HydroGeneraSingleAEM\\Project-HydroGenera"
   },
 
   "uartSetting":{
@@ -26,11 +27,11 @@
     "baudRate": 9600,
     "dataBits": 8,
     "stopBits": 1,
-    "parity": "none"
+    "parity": 0
   },
 
   "serverSettings":{
-    "url":"192.168.0.1:8080"
+    "url":"ws://socket.statistics.green-innovation.bg"
   }
 
 }

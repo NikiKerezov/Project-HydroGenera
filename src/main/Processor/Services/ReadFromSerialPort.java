@@ -1,5 +1,6 @@
 package Processor.Services;
 
+import DependancyContainer.Models.UartSetting;
 import EventEmitter.EventEmitter;
 import EventEmitter.Observer;
 import LocalData.Models.DataPackage;
@@ -16,10 +17,10 @@ public class ReadFromSerialPort extends Observer {
 
     private IProcessPackage processPackage;
     private printDataPackage printDataPackage;
-    private String PORT_NAME;
+    private UartSetting uartSetting;
 
-    public static void setInstance(IProcessPackage processPackage, String port){
-        instance = new ReadFromSerialPort(processPackage, port);
+    public static void setInstance(IProcessPackage processPackage, UartSetting uartSetting){
+        instance = new ReadFromSerialPort(processPackage, uartSetting);
     }
 
     public static ReadFromSerialPort getInstance() throws Exception {
@@ -29,17 +30,19 @@ public class ReadFromSerialPort extends Observer {
         return instance;
     }
 
-    private ReadFromSerialPort(IProcessPackage processPackage, String port) {
+    private ReadFromSerialPort(IProcessPackage processPackage, UartSetting uartSetting) {
         this.processPackage = processPackage;
-        this.PORT_NAME = port;
+        this.uartSetting = uartSetting;
     }
 
     public void ReadAndProcess() {//?flush port
 
-        //TODO: PORT_NAME = getPortName from settings etc
+        SerialPort serialPort = SerialPort.getCommPort(uartSetting.getPort());
 
-        SerialPort serialPort = SerialPort.getCommPort(PORT_NAME);
-        serialPort.setComPortParameters(9600, 8, 1, 0);
+        serialPort.setComPortParameters(uartSetting.getBaudRate(),
+                                        uartSetting.getDataBits(),
+                                        uartSetting.getStopBits(),
+                                        uartSetting.getParity());
 
         SerialPort[] arrayOfSerialPort = SerialPort.getCommPorts();
 
@@ -66,9 +69,7 @@ public class ReadFromSerialPort extends Observer {
                     if (input.size() == 16 
                         && input.get(14) == 0x0a 
                         && input.get(15) == 0x0d) {
-                            
-                        //input[15] = 0a
-                        //input[14] = 0d
+
                         printDataPackage.printPackage(processPackage.processPackage(input));
                         input.clear();
                     }

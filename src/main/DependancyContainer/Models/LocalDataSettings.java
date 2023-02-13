@@ -4,6 +4,12 @@ public class LocalDataSettings {
     private int dataLifespan;
     private String fileFormat;
 
+    public String getPath() {return path;}
+
+    public void setPath(String path) {this.path = path;}
+
+    private String path;
+
     public int getDataLifespan() {
         return dataLifespan;
     }

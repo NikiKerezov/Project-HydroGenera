@@ -67,11 +67,8 @@ public class ReadFromSerialPort extends Observer {
                     input.add(numRead);
 
                     if (input.size() == 16 
-                        && input.get(14) == 0x0a 
-                        && input.get(15) == 0x0d) {
-                            
-                        //input[15] = 0a
-                        //input[14] = 0d
+                        && input.get(14) == 0x0d
+                        && input.get(15) == 0x0a) {
 
                         DataPackage dataPackage = processPackage.processPackage(input);
                         EventEmitter.getInstance().setDataPackage(dataPackage);
@@ -79,6 +76,8 @@ public class ReadFromSerialPort extends Observer {
 
                         input.clear();
                     }
+
+                    input.clear();
 
                 } catch (Exception ignored) {}
                 finally {

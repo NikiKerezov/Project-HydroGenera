@@ -3,6 +3,7 @@ import DependancyContainer.Services.Data;
 import DependancyContainer.Services.JsonReader;
 import EventEmitter.EventEmitter;
 import LocalData.Services.SaveToCsv;
+import Logger.Services.ConsoleLogger;
 import Processor.Services.ProcessPackage;
 import Processor.Services.ReadFromSerialPort;
 import ServerCommunication.Services.WebSocketConnection;
@@ -29,6 +30,12 @@ public class Startup {
             case "WebSocket":
                 WebSocketConnection.setInstance(dependencies.getServerSettings().getUrl());
                 WebServer.setInstance();
+                break;
+        }
+
+        switch (dependencies.getLogSettings().getLogType()){
+            case "Console":
+                ConsoleLogger.setInstance(dependencies.getLogSettings().getLogLevel());
                 break;
         }
 

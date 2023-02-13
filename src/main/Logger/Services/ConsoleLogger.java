@@ -8,7 +8,9 @@ public class ConsoleLogger implements ILogger {
 
     public static ConsoleLogger instance;
 
-    private ConsoleLogger() {}
+    private ConsoleLogger() {
+        this.LOG_LEVEL = 1;
+    }
 
     public static ConsoleLogger getInstance() {
         if (instance == null) {
@@ -17,8 +19,9 @@ public class ConsoleLogger implements ILogger {
         return instance;
     }
 
-    public static void setInstance() {
+    public static void setInstance(int logLevel) {
         instance = new ConsoleLogger();
+        instance.LOG_LEVEL = logLevel;
     }
 
     private int LOG_LEVEL = 3; // TODO: get from dependencies

@@ -7,7 +7,7 @@ import DependancyContainer.Services.JsonReader;
 public class Settings {
     public static void main(String[] args) throws Exception {
         IJsonReader jsonReader = new JsonReader();
-        Data data = jsonReader.readJson("C:\\Users\\Lenovo\\repoTemp\\Project-HydroGenera\\data.json");
+        Data data = jsonReader.readJson("C:\\Users\\golqm\\Documents\\HydroGenera\\HydroGeneraSingleAEM\\Project-HydroGenera\\data.json");
 
         // print object data
         System.out.println(data.getCommunicationProtocol().getCircuit());

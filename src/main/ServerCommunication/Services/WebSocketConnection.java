@@ -24,17 +24,18 @@ public class WebSocketConnection extends Observer implements IServerConnection {
         return instance;
     }
 
-    public WebSocketConnection(String url) throws URISyntaxException {
+    private WebSocketConnection(String url) throws URISyntaxException {
         socket = IO.socket(url);
+    }
+    public void connect(){
+        socket.open();
         socket.on(Socket.EVENT_CONNECT, objects -> {
             System.out.println(objects);
         });
         socket.on(Socket.EVENT_DISCONNECT, objects -> {
             System.out.println(objects);
         });
-        socket.open();
     }
-
     @Override
     public void sendPackage(DataPackage dataPackage) {
         socket.emit("new_data", dataPackage);

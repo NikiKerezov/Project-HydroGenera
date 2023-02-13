@@ -23,7 +23,7 @@ public class SaveToCsv extends Observer implements ISaveToFile {
         instance = new SaveToCsv(path, lifespan_in_days);
         //create new files
         instance.createFile();
-        instance.checkAndDeleteOldFiles(directory);
+        //instance.checkAndDeleteOldFiles(directory);
     }
     public static SaveToCsv getInstance() throws Exception {
         if (instance == null) {

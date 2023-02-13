@@ -4,6 +4,7 @@ import DependancyContainer.Models.UartSetting;
 import EventEmitter.EventEmitter;
 import EventEmitter.Observer;
 import LocalData.Models.DataPackage;
+import Logger.Services.ConsoleLogger;
 import Processor.Contracts.IProcessPackage;
 import Processor.Utils.printDataPackage;
 import com.fazecast.jSerialComm.SerialPort;
@@ -80,9 +81,6 @@ public class ReadFromSerialPort extends Observer {
                     input.clear();
 
                 } catch (Exception ignored) {}
-                finally {
-                    serialPort.closePort();
-                }
         }
     }
 

@@ -3,6 +3,7 @@ package LocalData.Services;
 import EventEmitter.Observer;
 import LocalData.Contracts.ISaveToFile;
 import LocalData.Models.DataPackage;
+import Logger.Services.ConsoleLogger;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -94,7 +95,7 @@ public class SaveToCsv extends Observer implements ISaveToFile {
                     file.delete();
                 }
             } catch (ParseException e) {
-                e.printStackTrace();
+                ConsoleLogger.getInstance().log("Exception thrown: " + e.getMessage(), 1);
             }
         }
     }

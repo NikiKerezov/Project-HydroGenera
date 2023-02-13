@@ -74,8 +74,6 @@ public class ReadFromSerialPort extends Observer {
                         DataPackage dataPackage = processPackage.processPackage(input);
                         EventEmitter.getInstance().setDataPackage(dataPackage);
                         EventEmitter.getInstance().notifyAllObservers(dataPackage);
-
-                        input.clear();
                     }
 
                     input.clear();

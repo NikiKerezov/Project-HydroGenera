@@ -2,6 +2,7 @@ package ServerCommunication.Services;
 
 import EventEmitter.Observer;
 import LocalData.Models.DataPackage;
+import Logger.Services.ConsoleLogger;
 import ServerCommunication.Contracts.IServerConnection;
 import io.socket.client.IO;
 import io.socket.client.Socket;
@@ -38,7 +39,17 @@ public class WebSocketConnection extends Observer implements IServerConnection {
     }
     @Override
     public void sendPackage(DataPackage dataPackage) {
-        socket.emit("new_data", dataPackage);
+        try{
+            if (!socket.connected()) {
+                throw new RuntimeException("Socket is not connected");
+            }
+            socket.emit("new_data", dataPackage);
+        }
+        catch (Exception e){
+            ConsoleLogger.getInstance().log("Exception throws: " + e.getMessage(), 2);
+        }
+
+
     }
 
     @Override

@@ -3,6 +3,7 @@ package LocalData.Services;
 import EventEmitter.Observer;
 import LocalData.Contracts.ISaveToFile;
 import LocalData.Models.DataPackage;
+import Logger.Contracts.ILogger;
 import Logger.Services.ConsoleLogger;
 
 import java.io.File;
@@ -19,6 +20,7 @@ public class SaveToCsv extends Observer implements ISaveToFile {
     private final long lifespan_in_days;
     private static File directory;
     private File file;
+    private ILogger logger;
     
     public static void setInstance(String path, int lifespan_in_days){
         instance = new SaveToCsv(path, lifespan_in_days);

@@ -10,7 +10,7 @@ import Processor.Utils.PrintDataPackage;
 import ServerCommunication.Services.WebSocketConnection;
 import WebServer.Services.WebServer;
 
-public class Startup {
+public class Startup {/*
     public static void main(String[] args) throws Exception {
         IJsonReader jsonReader = new JsonReader();
         Data dependencies = jsonReader.readJson("C:\\Users\\golqm\\Documents\\HydroGenera\\HydroGeneraSingleAEM\\Project-HydroGenera\\data.json");
@@ -67,5 +67,5 @@ public class Startup {
         client.start();
         ReadFromSerialPort.getInstance().ReadAndProcess();
 
-    }
+    }*/
 }

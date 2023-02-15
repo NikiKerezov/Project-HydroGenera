@@ -84,18 +84,20 @@ public class SaveToCsv extends Observer implements ISaveToFile {
             return;
         }
         for (File file : files) {
-            String fileName = file.getName();
-            // Get the timestamp from the file name
-            String timestampString = fileName.substring(9, fileName.indexOf(".csv"));
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
-            try {
-                // Convert the timestamp string to a date
-                Date timestamp = sdf.parse(timestampString);
-                if (timestamp.getTime() < lifespan) {
-                    file.delete();
+            if (file.exists() && file.getName().length()==28 && file.getName().endsWith(".csv")){
+                String fileName = file.getName();
+                // Get the timestamp from the file name
+                String timestampString = fileName.substring(9, fileName.indexOf(".csv"));
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+                try {
+                    // Convert the timestamp string to a date
+                    Date timestamp = sdf.parse(timestampString);
+                    if (timestamp.getTime() < lifespan) {
+                        file.delete();
+                    }
+                } catch (ParseException e) {
+                    ConsoleLogger.getInstance().log("Exception thrown: " + e.getMessage(), 1);
                 }
-            } catch (ParseException e) {
-                ConsoleLogger.getInstance().log("Exception thrown: " + e.getMessage(), 1);
             }
         }
     }

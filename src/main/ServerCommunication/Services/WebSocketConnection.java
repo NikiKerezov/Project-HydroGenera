@@ -2,6 +2,7 @@ package ServerCommunication.Services;
 
 import EventEmitter.Observer;
 import LocalData.Models.DataPackage;
+import Logger.Contracts.ILogger;
 import Logger.Services.ConsoleLogger;
 import ServerCommunication.Contracts.IServerConnection;
 import io.socket.client.IO;
@@ -12,10 +13,13 @@ import java.net.URISyntaxException;
 public class WebSocketConnection extends Observer implements IServerConnection {
 
     private final Socket socket;
+    private ILogger logger;
     private static WebSocketConnection instance;
 
-    public static void setInstance(String url) throws URISyntaxException {
-        instance = new WebSocketConnection(url);
+    public void setInstance(String url, ILogger logger) throws URISyntaxException {
+        this.logger = logger;
+        //instance = new WebSocketConnection(url);
+        //instance = new WebSocketConnection(logger);
     }
 
     public static WebSocketConnection getInstance() throws Exception {
@@ -25,7 +29,8 @@ public class WebSocketConnection extends Observer implements IServerConnection {
         return instance;
     }
 
-    private WebSocketConnection(String url) throws URISyntaxException {
+    private WebSocketConnection(String url, ILogger logger) throws URISyntaxException {
+        this.logger = logger;
         socket = IO.socket(url);
     }
     public void connect(){

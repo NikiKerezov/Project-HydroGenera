@@ -95,7 +95,9 @@ public class ReadFromSerialPort extends Observer {
                         //EventEmitter.getInstance().notifyAllObservers(dataPackage);
 
                         printDataPackage.printPackage(dataPackage);
+                    }
 
+                    if (input.size() >= 16) {
                         input.clear();
                     }
 

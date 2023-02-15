@@ -34,9 +34,9 @@ public class ProcessPackage implements IProcessPackage {
         return true;
     }
     public DataPackage processPackage(ArrayList<Character> data) {//to be an external class
-        /*if (!validateData(data)) {
+        if (!validateData(data)) {
             throw new IllegalArgumentException("Invalid data");
-        }*/
+        }
 
         //Add address
 

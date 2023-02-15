@@ -99,7 +99,7 @@ public class ReadFromSerialPort extends Observer {
                         input.clear();
                     }
 
-                    if (input.size() => 16) {
+                    if (input.size() >= 16) {
                         input.clear();
                     }
 

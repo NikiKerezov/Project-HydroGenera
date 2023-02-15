@@ -16,8 +16,7 @@ public class WebSocketConnection extends Observer implements IServerConnection {
     private ILogger logger;
     private static WebSocketConnection instance;
 
-    public void setInstance(String url, ILogger logger) throws URISyntaxException {
-        this.logger = logger;
+    public static void setInstance(String url, ILogger logger) throws URISyntaxException {
         instance = new WebSocketConnection(url, logger);
     }
 

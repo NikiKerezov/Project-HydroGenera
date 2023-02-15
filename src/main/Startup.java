@@ -23,14 +23,14 @@ public class Startup {/*
 
         switch (dependencies.getLocalDataSettings().getFileFormat()){
             case "csv":
-                SaveToCsv.setInstance(dependencies.getLocalDataSettings().getPath(),dependencies.getLocalDataSettings().getDataLifespan());
+                SaveToCsv.setInstance(dependencies.getLocalDataSettings().getPath(),dependencies.getLocalDataSettings().getDataLifespan(), ConsoleLogger.getInstance());
                 break;
         }
 
         switch (dependencies.getCommunicationProtocol().getServer()){
             case "WebSocket":
-                WebSocketConnection.setInstance(dependencies.getServerSettings().getUrl());
-                WebServer.setInstance();
+                WebSocketConnection.setInstance(dependencies.getServerSettings().getUrl(), ConsoleLogger.getInstance());
+                //WebServer.setInstance();
                 break;
         }
 

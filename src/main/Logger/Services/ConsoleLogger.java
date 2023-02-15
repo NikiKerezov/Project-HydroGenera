@@ -8,8 +8,9 @@ public class ConsoleLogger implements ILogger {
 
     public static ConsoleLogger instance;
 
-    private ConsoleLogger() {
-        this.LOG_LEVEL = 1;
+    private ConsoleLogger(int logLevel) {
+        this.LOG_LEVEL = logLevel;
+        this.logQueue = new java.util.LinkedList<>();
     }
 
     public static ConsoleLogger getInstance() {
@@ -20,8 +21,7 @@ public class ConsoleLogger implements ILogger {
     }
 
     public static void setInstance(int logLevel) {
-        instance = new ConsoleLogger();
-        instance.LOG_LEVEL = logLevel;
+        instance = new ConsoleLogger(logLevel);
     }
 
     private int LOG_LEVEL = 3; // TODO: get from dependencies

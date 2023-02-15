@@ -48,8 +48,6 @@ public class WebSocketConnection extends Observer implements IServerConnection {
         catch (Exception e){
             ConsoleLogger.getInstance().log("Exception throws: " + e.getMessage(), 2);
         }
-
-
     }
 
     @Override

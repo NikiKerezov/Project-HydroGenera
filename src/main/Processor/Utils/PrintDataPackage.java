@@ -2,13 +2,13 @@ package Processor.Utils;
 
 import LocalData.Models.DataPackage;
 
-public class printDataPackage {
-    static printDataPackage instance = new printDataPackage();
+public class PrintDataPackage {
+    static PrintDataPackage instance = new PrintDataPackage();
 
-    private printDataPackage() {
+    private PrintDataPackage() {
     }
 
-    public static printDataPackage getInstance() {
+    public static PrintDataPackage getInstance() {
         return instance;
     }
 
@@ -20,5 +20,6 @@ public class printDataPackage {
         System.out.println("DataPackage bar: " + dataPackage.getBar());
         System.out.println("DataPackage uin: " + dataPackage.getUin());
         System.out.println("DataPackage pwm: " + dataPackage.getPwm());
+        System.out.println("-----------------------------------------------------------------------------------------------");
     }
 }

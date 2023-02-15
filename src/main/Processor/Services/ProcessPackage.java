@@ -15,7 +15,7 @@ public class ProcessPackage implements IProcessPackage {
         return instance;
     }
 
-    private String CONTROLLER_VERSION; //TODO: get from settings
+    private String CONTROLLER_VERSION = "1.0"; //TODO: get from settings
 
 
     private boolean validateData(ArrayList<Character> data) {
@@ -34,9 +34,9 @@ public class ProcessPackage implements IProcessPackage {
         return true;
     }
     public DataPackage processPackage(ArrayList<Character> data) {//to be an external class
-        if (!validateData(data)) {
+        /*if (!validateData(data)) {
             throw new IllegalArgumentException("Invalid data");
-        }
+        }*/
 
         //Add address
 
@@ -118,6 +118,7 @@ public class ProcessPackage implements IProcessPackage {
         double tmp = data.get(0);
 
         String timestamp = String.valueOf(System.currentTimeMillis());
+
 
         return new DataPackage(address, timestamp, amp, tmp, pwm, bar, uin);
     }

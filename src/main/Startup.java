@@ -6,6 +6,7 @@ import LocalData.Services.SaveToCsv;
 import Logger.Services.ConsoleLogger;
 import Processor.Services.ProcessPackage;
 import Processor.Services.ReadFromSerialPort;
+import Processor.Utils.PrintDataPackage;
 import ServerCommunication.Services.WebSocketConnection;
 import WebServer.Services.WebServer;
 
@@ -16,7 +17,7 @@ public class Startup {
 
         switch (dependencies.getGeneratorSetting().getUinChip()){
             case "A1":
-                ReadFromSerialPort.setInstance(ProcessPackage.getInstance(), dependencies.getUartSetting());
+                ReadFromSerialPort.setInstance(ProcessPackage.getInstance(), dependencies.getUartSetting(), PrintDataPackage.getInstance());
                 break;
         }
 

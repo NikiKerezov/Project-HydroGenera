@@ -22,8 +22,8 @@ public class SaveToCsv extends Observer implements ISaveToFile {
     private File file;
     private ILogger logger;
     
-    public static void setInstance(String path, int lifespan_in_days){
-        instance = new SaveToCsv(path, lifespan_in_days);
+    public static void setInstance(String path, int lifespan_in_days, ILogger logger){
+        instance = new SaveToCsv(path, lifespan_in_days, logger);
         //create new files
         instance.createFile();
         //instance.checkAndDeleteOldFiles(directory);
@@ -35,9 +35,10 @@ public class SaveToCsv extends Observer implements ISaveToFile {
         return instance;
     }
 
-    private SaveToCsv(String path, int lifespan_in_days) {
+    private SaveToCsv(String path, int lifespan_in_days, ILogger logger) {
         this.lifespan_in_days = lifespan_in_days;
         this.pathFiles = path;
+        this.logger = logger;
     }
 
     @Override

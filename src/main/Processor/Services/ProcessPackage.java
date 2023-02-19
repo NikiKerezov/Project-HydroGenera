@@ -24,9 +24,11 @@ public class ProcessPackage implements IProcessPackage {
         }
 
         double sum = 0;
-        for (int i = 1; i < 13; i++) {
+        for (int i = 1; i < 14; i++) {
             sum += data.get(i);
         }
+
+        sum %= 256;
 
         if (data.get(0) != sum) {
             return false;

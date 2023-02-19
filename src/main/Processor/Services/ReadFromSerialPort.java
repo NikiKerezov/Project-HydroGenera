@@ -1,6 +1,7 @@
 package Processor.Services;
 
 import DependancyContainer.Models.UartSetting;
+import EventEmitter.EventEmitter;
 import EventEmitter.Observer;
 import LocalData.Models.DataPackage;
 import Logger.Contracts.ILogger;
@@ -16,9 +17,9 @@ public class ReadFromSerialPort extends Observer {
 
     private static ReadFromSerialPort instance;
 
-    private IProcessPackage processPackage;
-    private PrintDataPackage printDataPackage;
-    private UartSetting uartSetting;
+    private final IProcessPackage processPackage;
+    private final PrintDataPackage printDataPackage;
+    private final UartSetting uartSetting;
 
     private final ILogger logger = ConsoleLogger.getInstance(); //TODO: get from settings
 
@@ -50,6 +51,7 @@ public class ReadFromSerialPort extends Observer {
 
         while (true) {
             serialPort.openPort();
+            serialPort.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 0, 0);
 
             InputStream in = serialPort.getInputStream();
 
@@ -79,7 +81,7 @@ public class ReadFromSerialPort extends Observer {
                     if ((numRead == 0x0a && input.size() != 16 && flag == 0)) {
                         flag = 1;
                         input.clear();
-                        System.out.println("Clearing input");
+                        logger.log("Clearing buffer", 3);
                         continue;
                     }
 
@@ -91,8 +93,8 @@ public class ReadFromSerialPort extends Observer {
 
                         DataPackage dataPackage = processPackage.processPackage(input);
 
-                        //EventEmitter.getInstance().setDataPackage(dataPackage);
-                        //EventEmitter.getInstance().notifyAllObservers(dataPackage);
+                        EventEmitter.getInstance().setDataPackage(dataPackage);
+                        EventEmitter.getInstance().notifyAllObservers(dataPackage);
 
                         printDataPackage.printPackage(dataPackage);
                     }
@@ -102,7 +104,7 @@ public class ReadFromSerialPort extends Observer {
                     }
 
                 } catch (Exception exception) {
-                    //logger.log("Exception throws: " + exception.getMessage(), 1);
+                    logger.log("Exception throws: " + exception.getMessage(), 1);
                 }
         }
     }

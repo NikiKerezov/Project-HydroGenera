@@ -45,6 +45,18 @@
             <artifactId>netty-socketio</artifactId>
             <version>1.7.23</version>
         </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>2.0.2-beta</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.1</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <properties>
         <maven.compiler.source>18</maven.compiler.source>

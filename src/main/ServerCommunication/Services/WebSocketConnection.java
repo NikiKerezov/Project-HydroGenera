@@ -2,6 +2,7 @@ package ServerCommunication.Services;
 
 import EventEmitter.Observer;
 import LocalData.Models.DataPackage;
+import LocalData.Services.SaveToCsv;
 import Logger.Contracts.ILogger;
 import Logger.Services.ConsoleLogger;
 import ServerCommunication.Contracts.IServerConnection;
@@ -16,13 +17,9 @@ public class WebSocketConnection extends Observer implements IServerConnection {
     private ILogger logger;
     private static WebSocketConnection instance;
 
-    public static void setInstance(String url, ILogger logger) throws URISyntaxException {
-        instance = new WebSocketConnection(url, logger);
-    }
-
-    public static WebSocketConnection getInstance() throws Exception {
+    public static WebSocketConnection getInstance(String url, ILogger logger) throws Exception {
         if (instance == null) {
-            throw new Exception("instance was forgotten to be initialized");
+            instance = new WebSocketConnection(url, logger);
         }
         return instance;
     }

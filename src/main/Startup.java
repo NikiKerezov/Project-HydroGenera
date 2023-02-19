@@ -11,6 +11,8 @@ import ServerCommunication.Services.WebSocketConnection;
 import WebServer.Services.WebServer;
 
 public class Startup {
+//    private static SaveToCsv saveToCsv;
+
     public static void main(String[] args) throws Exception {
         IJsonReader jsonReader = new JsonReader();
         Data dependencies = jsonReader.readJson("C:\\Users\\golqm\\Documents\\HydroGenera\\HydroGeneraSingleAEM\\Project-HydroGenera\\data.json");
@@ -23,13 +25,14 @@ public class Startup {
 
         switch (dependencies.getLocalDataSettings().getFileFormat()){
             case "csv":
-                SaveToCsv.setInstance(dependencies.getLocalDataSettings().getPath(),dependencies.getLocalDataSettings().getDataLifespan(), ConsoleLogger.getInstance());
+                SaveToCsv saveToCsv = SaveToCsv.getInstance(dependencies.getLocalDataSettings().getPath(),dependencies.getLocalDataSettings().getDataLifespan(), ConsoleLogger.getInstance());
+                EventEmitter.getInstance().attach(saveToCsv);
                 break;
         }
 
         switch (dependencies.getCommunicationProtocol().getServer()){
             case "WebSocket":
-                WebSocketConnection.setInstance(dependencies.getServerSettings().getUrl(), ConsoleLogger.getInstance());
+                WebSocketConnection webSocketConnection = WebSocketConnection.getInstance(dependencies.getServerSettings().getUrl(), ConsoleLogger.getInstance());
                 //WebServer.setInstance();
                 break;
         }
@@ -40,14 +43,14 @@ public class Startup {
                 break;
         }
 
-        EventEmitter.getInstance().attach(SaveToCsv.getInstance());
-        EventEmitter.getInstance().attach(WebSocketConnection.getInstance());
-        EventEmitter.getInstance().attach(WebServer.getInstance());
+//        EventEmitter.getInstance().attach(saveToCsv);
+//        EventEmitter.getInstance().attach(WebSocketConnection.getInstance());
+        //EventEmitter.getInstance().attach(WebServer.getInstance());
 
         Thread server = new Thread(){
             public void run(){
                 try {
-                    WebServer.getInstance().startServer();
+                   // WebServer.getInstance().startServer();
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
@@ -56,7 +59,7 @@ public class Startup {
         Thread client = new Thread(){
             public void run(){
                 try {
-                    WebSocketConnection.getInstance().connect();
+                   // WebSocketConnection.getInstance().connect();
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }

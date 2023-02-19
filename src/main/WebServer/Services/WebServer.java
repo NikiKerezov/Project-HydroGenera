@@ -4,6 +4,7 @@ import EventEmitter.Observer;
 import LocalData.Models.DataPackage;
 import Logger.Contracts.ILogger;
 import Logger.Services.ConsoleLogger;
+import ServerCommunication.Services.WebSocketConnection;
 import WebServer.Contracts.IWebServer;
 import com.corundumstudio.socketio.AckRequest;
 import com.corundumstudio.socketio.Configuration;
@@ -29,6 +30,14 @@ public class WebServer extends Observer implements IWebServer {
         config.setPort(9092);
         server = new SocketIOServer(config);
     }
+
+    public static WebServer getInstance(ILogger logger) throws Exception {
+        if (instance == null) {
+            instance = new WebServer(logger);
+        }
+        return instance;
+    }
+
     public void startServer(){
         server.start();
         server.addEventListener("message", String.class, new DataListener<String>() {
@@ -51,16 +60,6 @@ public class WebServer extends Observer implements IWebServer {
 
             }
         });
-    }
-    public static void setInstance(ILogger logger) throws URISyntaxException, InterruptedException {
-        instance = new WebServer(logger);
-    }
-
-    public static WebServer getInstance() throws Exception {
-        if (instance == null) {
-            throw new Exception("instance was forgotten to be initialized");
-        }
-        return instance;
     }
 
     @Override

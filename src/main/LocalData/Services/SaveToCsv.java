@@ -23,6 +23,7 @@ public class SaveToCsv extends Observer implements ISaveToFile {
     private OutputStreamWriter writer = null;
     private ILogger logger;
 
+    //s
     public static SaveToCsv getInstance(String path, int lifespan_in_days, ILogger logger) {
         if (instance == null) {
             instance = new SaveToCsv(path, lifespan_in_days, logger);

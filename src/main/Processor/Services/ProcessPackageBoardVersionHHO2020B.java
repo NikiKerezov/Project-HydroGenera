@@ -1,22 +1,17 @@
 package Processor.Services;
 
 import LocalData.Models.DataPackage;
-import Processor.Contracts.IProcessPackage;
 
 import java.util.ArrayList;
 
-public class ProcessPackage implements IProcessPackage {
+public class ProcessPackageBoardVersionHHO2020B {
+    private static final ProcessPackageBoardVersionHHO2020B instance = new ProcessPackageBoardVersionHHO2020B();
 
-    private static final ProcessPackage instance = new ProcessPackage();
+    private ProcessPackageBoardVersionHHO2020B() {}
 
-    private ProcessPackage() {}
-
-    public static ProcessPackage getInstance() {
+    public static ProcessPackageBoardVersionHHO2020B getInstance() {
         return instance;
     }
-
-    private String CONTROLLER_VERSION = "1.0"; //TODO: get from settings
-
 
     private boolean validateData(ArrayList<Character> data) {
         if (data.size() != 16) {
@@ -107,13 +102,7 @@ public class ProcessPackage implements IProcessPackage {
 
         double amp;
 
-        if (CONTROLLER_VERSION.equals("1.0")) { //Tuka nz koq tochno trqbva da e zatova sum slojil 1.0
-            amp = (temp  * 0.0048828125 - 0.5859375) / 0.0390625;
-        }
-
-        else {
-            amp = temp / 8;
-        }
+        amp = temp / 8;
 
         //Getting Temperature
 

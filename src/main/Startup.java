@@ -4,11 +4,10 @@ import DependancyContainer.Services.JsonReader;
 import EventEmitter.EventEmitter;
 import LocalData.Services.SaveToCsv;
 import Logger.Services.ConsoleLogger;
-import Processor.Services.ProcessPackage;
+import Processor.Services.ProcessPackageBoardVersionGI2CPU28;
 import Processor.Services.ReadFromSerialPort;
 import Processor.Utils.PrintDataPackage;
 import ServerCommunication.Services.WebSocketConnection;
-import WebServer.Services.WebServer;
 
 public class Startup {
 //    private static SaveToCsv saveToCsv;
@@ -19,7 +18,7 @@ public class Startup {
 
         switch (dependencies.getGeneratorSetting().getUinChip()){
             case "A1":
-                ReadFromSerialPort.setInstance(ProcessPackage.getInstance(), dependencies.getUartSetting(), PrintDataPackage.getInstance());
+                ReadFromSerialPort.setInstance(ProcessPackageBoardVersionGI2CPU28.getInstance(), dependencies.getUartSetting(), PrintDataPackage.getInstance());
                 break;
         }
 

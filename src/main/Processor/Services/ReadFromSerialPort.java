@@ -2,7 +2,6 @@ package Processor.Services;
 
 import DependancyContainer.Models.UartSetting;
 import EventEmitter.EventEmitter;
-import EventEmitter.Observer;
 import LocalData.Models.DataPackage;
 import Logger.Contracts.ILogger;
 import Logger.Services.ConsoleLogger;
@@ -10,20 +9,19 @@ import Processor.Contracts.IProcessPackage;
 import Processor.Utils.PrintDataPackage;
 import com.fazecast.jSerialComm.SerialPort;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-public class ReadFromSerialPort extends Observer {
+public class ReadFromSerialPort {
 
     private static ReadFromSerialPort instance;
-
     private final IProcessPackage processPackage;
     private final PrintDataPackage printDataPackage;
     private final UartSetting uartSetting;
-
     private final ILogger logger = ConsoleLogger.getInstance(); //TODO: get from settings
 
-    public static void setInstance(ProcessPackage processPackage,  UartSetting uartSetting, PrintDataPackage printDataPackage){
+    public static void setInstance(ProcessPackageBoardVersionGI2CPU28 processPackage, UartSetting uartSetting, PrintDataPackage printDataPackage){
         instance = new ReadFromSerialPort(processPackage, uartSetting, printDataPackage);
     }
 
@@ -34,13 +32,13 @@ public class ReadFromSerialPort extends Observer {
         return instance;
     }
 
-    private ReadFromSerialPort(ProcessPackage processPackage, UartSetting uartSetting, PrintDataPackage printDataPackage) {
+    private ReadFromSerialPort(IProcessPackage processPackage, UartSetting uartSetting, PrintDataPackage printDataPackage) {
         this.processPackage = processPackage;
         this.uartSetting = uartSetting;
         this.printDataPackage = printDataPackage;
     }
 
-    public void ReadAndProcess() {
+    public void ReadAndProcess() throws IOException {
 
         SerialPort serialPort = SerialPort.getCommPort(uartSetting.getPort());
 
@@ -107,10 +105,5 @@ public class ReadFromSerialPort extends Observer {
                     logger.log("Exception throws: " + exception.getMessage(), 1);
                 }
         }
-    }
-
-    @Override
-    public void update(DataPackage dataPackage) {
-        ReadAndProcess();
     }
 }

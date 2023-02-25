@@ -121,7 +121,6 @@ public class ProcessPackage implements IProcessPackage {
 
         String timestamp = String.valueOf(System.currentTimeMillis());
 
-
         return new DataPackage(address, timestamp, amp, tmp, pwm, bar, uin);
     }
 }

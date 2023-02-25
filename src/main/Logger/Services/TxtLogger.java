@@ -2,20 +2,21 @@ package Logger.Services;
 
 import Logger.Contracts.ILogger;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Queue;
 
-public class ConsoleLogger implements ILogger {
+public class TxtLogger implements ILogger {
+    public static TxtLogger instance;
 
-    public static ConsoleLogger instance;
-
-    private ConsoleLogger(int logLevel) {
+    private TxtLogger(int logLevel) {
         this.LOG_LEVEL = logLevel;
         this.logQueue = new java.util.LinkedList<>();
     }
 
-    public static ConsoleLogger getInstance() {
+    public static TxtLogger getInstance() {
         if (instance == null) {
             throw new IllegalStateException("Logger not initialized");
         }
@@ -23,27 +24,29 @@ public class ConsoleLogger implements ILogger {
     }
 
     public static void setInstance(int logLevel) {
-        instance = new ConsoleLogger(logLevel);
+        instance = new TxtLogger(logLevel);
     }
 
     private int LOG_LEVEL = 3; // TODO: get from dependencies
+    private final String LOG_FILE_PATH = "C:\\Users\\nikol\\Desktop\\log.txt"; //TODO: get from dependencies
 
     private Queue<String> logQueue;
 
     private boolean QUEUE_IS_LOCKED = false;
 
-    private void emptyQueue() {
+    private void emptyQueue() throws IOException {
         QUEUE_IS_LOCKED = true;
 
         while (!this.logQueue.isEmpty()) {
+            FileWriter fileWriter = new FileWriter(LOG_FILE_PATH, true);
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
             LocalDateTime now = LocalDateTime.now();
-            System.out.println(now + ": " + this.logQueue.poll());
+            fileWriter.write(now + ": " + this.logQueue.poll());
         }
 
         QUEUE_IS_LOCKED = false;
     }
-    public void log(String message, int level) {
+    public void log(String message, int level) throws IOException {
         this.logQueue.add(message);
 
         if (!QUEUE_IS_LOCKED)

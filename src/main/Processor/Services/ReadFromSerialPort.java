@@ -21,7 +21,7 @@ public class ReadFromSerialPort {
     private final UartSetting uartSetting;
     private final ILogger logger = ConsoleLogger.getInstance(); //TODO: get from settings
 
-    public static void setInstance(ProcessPackageBoardVersionGI2CPU28 processPackage, UartSetting uartSetting, PrintDataPackage printDataPackage){
+    public static void setInstance(IProcessPackage processPackage, UartSetting uartSetting, PrintDataPackage printDataPackage){
         instance = new ReadFromSerialPort(processPackage, uartSetting, printDataPackage);
     }
 

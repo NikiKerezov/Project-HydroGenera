@@ -1,10 +1,11 @@
 package Processor.Services;
 
 import LocalData.Models.DataPackage;
+import Processor.Contracts.IProcessPackage;
 
 import java.util.ArrayList;
 
-public class ProcessPackageBoardVersionHHO2020B {
+public class ProcessPackageBoardVersionHHO2020B implements IProcessPackage {
     private static final ProcessPackageBoardVersionHHO2020B instance = new ProcessPackageBoardVersionHHO2020B();
 
     private ProcessPackageBoardVersionHHO2020B() {}

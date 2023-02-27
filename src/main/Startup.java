@@ -14,7 +14,7 @@ public class Startup {
 
     public static void main(String[] args) throws Exception {
         IJsonReader jsonReader = new JsonReader();
-        Data dependencies = jsonReader.readJson("C:\\Users\\golqm\\Documents\\HydroGenera\\HydroGeneraSingleAEM\\Project-HydroGenera\\data.json");
+        Data dependencies = jsonReader.readJson("C:\\Users\\Lenovo\\repoTemp\\Project-HydroGenera\\data.json");
 
         switch (dependencies.getGeneratorSetting().getUinChip()){
             case "A1":
@@ -44,12 +44,12 @@ public class Startup {
 
 //        EventEmitter.getInstance().attach(saveToCsv);
 //        EventEmitter.getInstance().attach(WebSocketConnection.getInstance());
-        //EventEmitter.getInstance().attach(WebServer.getInstance());
+        EventEmitter.getInstance().attach(WebServer.getInstance(ConsoleLogger.instance));
 
         Thread server = new Thread(){
             public void run(){
                 try {
-                   // WebServer.getInstance().startServer();
+                   WebServer.getInstance(ConsoleLogger.instance).startServer();
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
@@ -58,7 +58,7 @@ public class Startup {
         Thread client = new Thread(){
             public void run(){
                 try {
-                   // WebSocketConnection.getInstance().connect();
+                   WebSocketConnection.getInstance("", ConsoleLogger.instance).connect();
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }

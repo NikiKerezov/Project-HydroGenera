@@ -11,7 +11,7 @@ public class Main {
 
         DataPackage data = new DataPackage(10, "nz", 1, 2, 3, 4, 5);
         SaveToCsv file = SaveToCsv.getInstance("C:\\Users\\Lenovo\\COMport", 7, ConsoleLogger.instance);
-//        SaveToCsv file = SaveToCsv.getInstance();
+
         file.saveToFile(data);
 
         // create object mapper

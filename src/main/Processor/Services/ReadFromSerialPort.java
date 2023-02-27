@@ -27,6 +27,7 @@ public class ReadFromSerialPort extends Observer {
         instance = new ReadFromSerialPort(processPackage, uartSetting, printDataPackage);
     }
 
+
     public static ReadFromSerialPort getInstance() throws Exception {
         if (instance == null) {
             throw new Exception("ReadFromSerialPort is not initialized");

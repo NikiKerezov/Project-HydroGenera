@@ -7,6 +7,10 @@ public class UartSetting {
     private int stopBits;
     private int parity;
 
+    public UartSetting() {
+        // Default constructor required by Jackson
+    }
+
     public UartSetting(String port, int baudRate, int dataBits, int stopBits, int parity) {
         this.port = port;
         this.baudRate = baudRate;

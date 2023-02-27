@@ -4,7 +4,6 @@ import EventEmitter.Observer;
 import LocalData.Models.DataPackage;
 import Logger.Contracts.ILogger;
 import Logger.Services.ConsoleLogger;
-import ServerCommunication.Services.WebSocketConnection;
 import WebServer.Contracts.IWebServer;
 import com.corundumstudio.socketio.AckRequest;
 import com.corundumstudio.socketio.Configuration;
@@ -13,9 +12,7 @@ import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.listener.ConnectListener;
 import com.corundumstudio.socketio.listener.DataListener;
 
-import java.net.URISyntaxException;
 import java.util.List;
-import java.util.UUID;
 
 public class WebServer extends Observer implements IWebServer {
 

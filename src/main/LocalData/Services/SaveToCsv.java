@@ -38,7 +38,8 @@ public class SaveToCsv extends Observer implements ISaveToFile {
 
         checkAndDeleteOldFiles(path);
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+        //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss.ms");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss.ms");
         String currentTimestamp = sdf.format(new Date());
         fileName = "timestamp" + currentTimestamp + ".csv";
         try {

@@ -3,14 +3,23 @@ package Logger.Services;
 import Logger.Contracts.ILogger;
 
 import java.util.Queue;
+import java.util.logging.Logger;
 
 public class ConsoleLogger implements ILogger {
 
     public static ConsoleLogger instance;
+    private Logger logger;
 
     private ConsoleLogger(int logLevel) {
         this.LOG_LEVEL = logLevel;
         this.logQueue = new java.util.LinkedList<>();
+    }
+
+    static {
+        init();
+    }
+    public static void init() {
+        ConsoleLogger.getInstance().logger = Logger.getLogger(ConsoleLogger.class.getName());
     }
 
     public static ConsoleLogger getInstance() {

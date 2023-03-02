@@ -24,6 +24,7 @@ public class TxtLogger implements ILogger {
     }
 
     public static void setInstance(int logLevel) {
+        //TODO: create new file with timestamp as name
         instance = new TxtLogger(logLevel);
     }
 

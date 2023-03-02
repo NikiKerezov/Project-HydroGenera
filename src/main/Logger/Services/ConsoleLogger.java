@@ -17,13 +17,6 @@ public class ConsoleLogger implements ILogger {
         this.logQueue = new java.util.LinkedList<>();
     }
 
-    static {
-        init();
-    }
-    public static void init() {
-        ConsoleLogger.getInstance().logger = Logger.getLogger(ConsoleLogger.class.getName());
-    }
-
     public static ConsoleLogger getInstance() {
         if (instance == null) {
             throw new IllegalStateException("Logger not initialized");

@@ -13,7 +13,8 @@
 
   "logSettings":{
     "logType":"Console",
-    "logLevel":3
+    "logLevel":3,
+    "logPath":"C:\\Users\\golqm\\Documents\\HydroGenera\\HydroGeneraSingleAEM\\Project-HydroGenera\\Logger\\log.txt"
   },
 
   "localDataSettings":{

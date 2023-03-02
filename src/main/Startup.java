@@ -19,7 +19,7 @@ public class Startup {
 
         switch (dependencies.getGeneratorSetting().getUinChip()){
             case "A1":
-                ReadFromSerialPort.setInstance(ProcessPackageBoardVersionGI2CPU28.getInstance(), dependencies.getUartSetting(), PrintDataPackage.getInstance());
+                ReadFromSerialPort.setInstance(ProcessPackageBoardVersionGI2CPU28.getInstance(), dependencies.getUartSetting(), PrintDataPackage.getInstance(), ConsoleLogger.getInstance());
                 break;
         }
 
@@ -32,7 +32,7 @@ public class Startup {
 
         switch (dependencies.getCommunicationProtocol().getServer()){
             case "WebSocket":
-                WebSocketConnection webSocketConnection = WebSocketConnection.getInstance(dependencies.getServerSettings().getUrl(), ConsoleLogger.getInstance());
+                WebSocketConnection webSocketConnection = WebSocketConnection.getInstance(dependencies.getServerSettings().getUrl(), ConsoleLogger.getInstance(), dependencies.getGeneratorSetting().getId());
                 //WebServer.setInstance();
                 break;
         }
@@ -42,6 +42,8 @@ public class Startup {
                 ConsoleLogger.setInstance(dependencies.getLogSettings().getLogLevel());
                 break;
         }
+
+
 
 //        EventEmitter.getInstance().attach(saveToCsv);
 //        EventEmitter.getInstance().attach(WebSocketConnection.getInstance());
@@ -59,7 +61,7 @@ public class Startup {
         Thread client = new Thread(){
             public void run(){
                 try {
-                   WebSocketConnection.getInstance("", ConsoleLogger.instance).connect();
+                   WebSocketConnection.getInstance("", ConsoleLogger.instance, dependencies.getGeneratorSetting().getId()).connect();
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }

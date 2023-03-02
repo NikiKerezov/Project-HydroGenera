@@ -11,9 +11,10 @@ import java.util.Queue;
 public class TxtLogger implements ILogger {
     public static TxtLogger instance;
 
-    private TxtLogger(int logLevel) {
+    private TxtLogger(int logLevel, String filePath) {
         this.LOG_LEVEL = logLevel;
         this.logQueue = new java.util.LinkedList<>();
+        this.LOG_FILE_PATH = filePath;
     }
 
     public static TxtLogger getInstance() {
@@ -23,13 +24,13 @@ public class TxtLogger implements ILogger {
         return instance;
     }
 
-    public static void setInstance(int logLevel) {
+    public static void setInstance(int logLevel, String filePath) {
         //TODO: create new file with timestamp as name
-        instance = new TxtLogger(logLevel);
+        instance = new TxtLogger(logLevel, filePath);
     }
 
-    private int LOG_LEVEL = 3; // TODO: get from dependencies
-    private final String LOG_FILE_PATH = "C:\\Users\\nikol\\Desktop\\log.txt"; //TODO: get from dependencies
+    private int LOG_LEVEL;
+    private String LOG_FILE_PATH;
 
     private Queue<String> logQueue;
 

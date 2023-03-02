@@ -19,10 +19,10 @@ public class ReadFromSerialPort {
     private final IProcessPackage processPackage;
     private final PrintDataPackage printDataPackage;
     private final UartSetting uartSetting;
-    private final ILogger logger = ConsoleLogger.getInstance(); //TODO: get from settings
+    private final ILogger logger;
 
-    public static void setInstance(IProcessPackage processPackage, UartSetting uartSetting, PrintDataPackage printDataPackage){
-        instance = new ReadFromSerialPort(processPackage, uartSetting, printDataPackage);
+    public static void setInstance(IProcessPackage processPackage, UartSetting uartSetting, PrintDataPackage printDataPackage, ILogger logger) throws Exception {
+        instance = new ReadFromSerialPort(processPackage, uartSetting, printDataPackage, logger);
     }
 
 
@@ -33,10 +33,11 @@ public class ReadFromSerialPort {
         return instance;
     }
 
-    private ReadFromSerialPort(IProcessPackage processPackage, UartSetting uartSetting, PrintDataPackage printDataPackage) {
+    private ReadFromSerialPort(IProcessPackage processPackage, UartSetting uartSetting, PrintDataPackage printDataPackage, ILogger logger) {
         this.processPackage = processPackage;
         this.uartSetting = uartSetting;
         this.printDataPackage = printDataPackage;
+        this.logger = logger;
     }
 
     public void ReadAndProcess() throws IOException {

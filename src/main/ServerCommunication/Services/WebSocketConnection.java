@@ -1,5 +1,6 @@
 package ServerCommunication.Services;
 
+import DependancyContainer.Services.Data;
 import EventEmitter.Observer;
 import LocalData.Models.DataPackage;
 import LocalData.Services.SaveToCsv;
@@ -17,16 +18,19 @@ public class WebSocketConnection extends Observer implements IServerConnection {
     private ILogger logger;
     private static WebSocketConnection instance;
 
-    public static WebSocketConnection getInstance(String url, ILogger logger) throws Exception {
+    private int generatorId;
+
+    public static WebSocketConnection getInstance(String url, ILogger logger, int id) throws Exception {
         if (instance == null) {
-            instance = new WebSocketConnection(url, logger);
+            instance = new WebSocketConnection(url, logger, id);
         }
         return instance;
     }
 
-    private WebSocketConnection(String url, ILogger logger) throws URISyntaxException {
+    private WebSocketConnection(String url, ILogger logger, int id) throws URISyntaxException {
         this.logger = logger;
         socket = IO.socket(url);
+        generatorId = id;
     }
     public void connect(){
         socket.open();
@@ -43,7 +47,10 @@ public class WebSocketConnection extends Observer implements IServerConnection {
             if (!socket.connected()) {
                 throw new RuntimeException("Socket is not connected");
             }
-            socket.emit("new_data", dataPackage);
+            socket.emit("new_data", new Object() {
+                public int generatorId = WebSocketConnection.this.generatorId;
+                public DataPackage data = dataPackage;
+            });
         }
         catch (Exception e){
             ConsoleLogger.getInstance().log("Exception throws: " + e.getMessage(), 2);

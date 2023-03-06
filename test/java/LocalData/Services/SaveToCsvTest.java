@@ -7,6 +7,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+import static org.junit.Assert.assertEquals;
 
 class SaveToCsvTest {
     private static SaveToCsv saveToCsv;
@@ -15,10 +20,31 @@ class SaveToCsvTest {
     private static ILogger logger;
 
     @BeforeAll
-    static void setUp() {
+    static void setUp() throws IOException {
         saveToCsv = SaveToCsv.getInstance(testFilePath, lifespanInDays, logger);
         saveToCsv.createFolder();
         System.out.println("createFolder");
+    }
+
+    //proverka dali zapisva pravilnite danni
+    @Test
+    void testValuesOfFile() throws IOException {
+        // Create a test DataPackage
+        DataPackage testDataPackage = new DataPackage(10, "nz", 1, 2, 3, 4, 5);
+
+        // Call the saveToFile method
+        saveToCsv.saveToFile(testDataPackage);
+
+        // Get the name of the file that was saved
+        String fileName = saveToCsv.getFileName();
+
+        // Read the contents of the file
+        String filePath = testFilePath + fileName;
+        String fileContents = Files.readString(Paths.get(filePath));
+
+        // Check if the file contents match the expected output
+        String expectedOutput = "10,nz,1.0,2.0,3.0,4.0,5.0";
+        assertEquals(expectedOutput, fileContents.trim());
     }
 
     @Test

@@ -1,4 +1,3 @@
-/*
 package WebServer.Services;
 
 import io.socket.engineio.server.Emitter;
@@ -21,12 +20,14 @@ public class EngineIoServlet extends HttpServlet {
         mEngineIoServer.handleRequest(request, response);
     }
 
-    server.on("connection", new Emitter.Listener() {
-        @Override
-        public void call(Object... args) {
-            EngineIoSocket socket = (EngineIoSocket) args[0];
-            // Do something with socket
-        }
-    });
+    public EngineIoServlet() {
+        // Register a connection listener
+        mEngineIoServer.on("connection", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                EngineIoSocket socket = (EngineIoSocket) args[0];
+                // Do something with socket
+            }
+        });
+    }
 }
-*/

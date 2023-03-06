@@ -9,6 +9,7 @@ import ServerCommunication.Contracts.IServerConnection;
 import io.socket.client.IO;
 import io.socket.client.Socket;
 
+import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class WebSocketConnection extends Observer implements IServerConnection {
@@ -38,7 +39,7 @@ public class WebSocketConnection extends Observer implements IServerConnection {
         });
     }
     @Override
-    public void sendPackage(DataPackage dataPackage) {
+    public void sendPackage(DataPackage dataPackage) throws IOException {
         try{
             if (!socket.connected()) {
                 throw new RuntimeException("Socket is not connected");
@@ -46,12 +47,12 @@ public class WebSocketConnection extends Observer implements IServerConnection {
             socket.emit("new_data", dataPackage);
         }
         catch (Exception e){
-            ConsoleLogger.getInstance().log("Exception throws: " + e.getMessage(), 2);
+            logger.log("Exception throws: " + e.getMessage(), 2);
         }
     }
 
     @Override
-    public void update(DataPackage dataPackage) {
+    public void update(DataPackage dataPackage) throws IOException {
         sendPackage(dataPackage);
     }
 }

@@ -2,6 +2,7 @@ package EventEmitter;
 
 import LocalData.Models.DataPackage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -52,7 +53,11 @@ public class EventEmitter {
             workQueue.execute(new Runnable() {
                 @Override
                 public void run() {
-                    observer.update(dataPackage);
+                    try {
+                        observer.update(dataPackage);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             });
 

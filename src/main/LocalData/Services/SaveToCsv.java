@@ -24,14 +24,14 @@ public class SaveToCsv extends Observer implements ISaveToFile {
     private ILogger logger;
 
     //s
-    public static SaveToCsv getInstance(String path, int lifespan_in_days, ILogger logger) {
+    public static SaveToCsv getInstance(String path, int lifespan_in_days, ILogger logger) throws IOException {
         if (instance == null) {
             instance = new SaveToCsv(path, lifespan_in_days, logger);
         }
         return instance;
     }
 
-    private SaveToCsv(String path, int lifespan_in_days, ILogger logger) {
+    private SaveToCsv(String path, int lifespan_in_days, ILogger logger) throws IOException {
         this.lifespan_in_days = lifespan_in_days;
         this.pathFiles = path;
         this.logger = logger;
@@ -72,7 +72,7 @@ public class SaveToCsv extends Observer implements ISaveToFile {
     }
 
     //parsing the timestamp from the file name and comparing it to current time
-    private void checkAndDeleteOldFiles(String dirName) {
+    private void checkAndDeleteOldFiles(String dirName) throws IOException {
         File directory = new File(dirName);
         long currentTime = System.currentTimeMillis();
         long lifespan = currentTime - (lifespan_in_days * 24 * 60 * 60 * 1000);
@@ -93,7 +93,7 @@ public class SaveToCsv extends Observer implements ISaveToFile {
                         f.delete();
                     }
                 } catch (ParseException e) {
-                    ConsoleLogger.getInstance().log("Exception thrown: " + e.getMessage(), 1);
+                    logger.log("Exception thrown: " + e.getMessage(), 1);
                 }
             }
         }

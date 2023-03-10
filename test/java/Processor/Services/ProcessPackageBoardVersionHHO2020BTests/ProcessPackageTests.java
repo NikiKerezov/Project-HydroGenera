@@ -1,13 +1,14 @@
 package Processor.Services.ProcessPackageBoardVersionHHO2020BTests;
 
+import LocalData.Models.DataPackage;
 import Processor.Services.ProcessPackageBoardVersionHHO2020B;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ProcessPackageTests {
     private static ProcessPackageBoardVersionHHO2020B processPackageBoardVersionHHO2020B;
@@ -19,7 +20,7 @@ public class ProcessPackageTests {
     @Test
     public void test() {
         assertDoesNotThrow(() -> {
-            processPackageBoardVersionHHO2020B.processPackage(new ArrayList<Character>(){
+            DataPackage processedPackage = processPackageBoardVersionHHO2020B.processPackage(new ArrayList<Character>(){
                 {
                     add((char) 0x3D);
                     add((char) 0x36);
@@ -39,9 +40,14 @@ public class ProcessPackageTests {
                     add((char) 0X0A);
                 }
             });
+
+            assertEquals(processedPackage.getAmp(), 29.25);
+            assertEquals(processedPackage.getUin(), 28.28);
+            assertEquals(processedPackage.getBar(), 0.393);
+            assertEquals(processedPackage.getPwm(), 35.26);
+            assertEquals(processedPackage.getTmp(), 29.0);
         });
 
-        //TODO - assert the data
     }
 
     @Test

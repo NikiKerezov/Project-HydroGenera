@@ -3,6 +3,7 @@ package Processor.Services;
 import LocalData.Models.DataPackage;
 import Processor.Contracts.IProcessPackage;
 
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -38,6 +39,10 @@ public class PRASETO implements IProcessPackage {
             throw new IllegalArgumentException("Invalid data");
         }
 
+        DecimalFormat dfTwoDec = new DecimalFormat("#.##");
+        DecimalFormat dfThreeDec = new DecimalFormat("#.###");
+        String format;
+
         //Add address
 
         int address = data.get(1);
@@ -55,6 +60,7 @@ public class PRASETO implements IProcessPackage {
         data.remove(0);
         pwmHi = pwmHi << 8;
         pwmHi = pwmHi | data.get(0);
+        pwmHi = 65535 - pwmHi;
         data.remove(0);
 
         //Getting PWM low
@@ -63,11 +69,14 @@ public class PRASETO implements IProcessPackage {
         data.remove(0);
         pwmLow = pwmLow << 8;
         pwmLow = pwmLow | data.get(0);
+        pwmLow = 65535 - pwmLow;
         data.remove(0);
 
         //Calculating PWM
 
-        double pwm = (pwmHi / (pwmHi + pwmLow)) * 100;
+        double pwm = ((double) pwmHi / (double) (pwmHi + pwmLow)) * 100;
+        format = dfTwoDec.format(pwm);
+        pwm = Double.parseDouble(format);
 
         //Getting Uin
 
@@ -79,7 +88,9 @@ public class PRASETO implements IProcessPackage {
 
         //Calculating Uin
 
-        double uin = temp * 0.0048828125 * 10.2338;
+        double uin = temp * 0.004882813 * 10.2157;
+        format = dfTwoDec.format(uin);
+        uin = Double.parseDouble(format);
 
         //Getting Bar
 
@@ -92,6 +103,8 @@ public class PRASETO implements IProcessPackage {
         //Calculating Bar
 
         double bar = (temp * 0.0048828125 - 0.916) / 1.2213333;
+        format = dfThreeDec.format(bar);
+        bar = Double.parseDouble(format);
 
         //Getting Amp
 
@@ -105,7 +118,9 @@ public class PRASETO implements IProcessPackage {
 
         double amp;
 
-        amp = temp / 4;
+        amp = (double) temp / 4;
+        format = dfTwoDec.format(amp);
+        amp = Double.parseDouble(format);
 
         //Getting Temperature
 

@@ -9,8 +9,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PRASETOTests {
     private static PRASETO PRASETO;
@@ -23,7 +23,7 @@ public class PRASETOTests {
     public void test() {
 
         assertDoesNotThrow(() -> {
-            PRASETO.processPackage(new ArrayList<Character>(){
+            DataPackage processedPackage = PRASETO.processPackage(new ArrayList<Character>(){
                 {
                     add((char) 0x3D);
                     add((char) 0x36);
@@ -43,9 +43,13 @@ public class PRASETOTests {
                     add((char) 0X0A);
                 }
             });
-        });
 
-        //TODO - assert the data
+            assertEquals(processedPackage.getAmp(), 58.5);
+            assertEquals(processedPackage.getUin(), 28.23);
+            assertEquals(processedPackage.getBar(), 0.393);
+            assertEquals(processedPackage.getPwm(), 35.26);
+            assertEquals(processedPackage.getTmp(), 29.0);
+        });
     }
 
     @Test

@@ -7,7 +7,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.Scanner;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class LogTests {
@@ -15,14 +17,17 @@ public class LogTests {
 
     @BeforeEach
     public void setUp() {
-        TxtLogger.setInstance(3);
+
+        TxtLogger.setInstance(3, "test.txt");
         txtLogger = TxtLogger.getInstance();
     }
-    //TODO: test with file
 
     @Test
     public void test() throws IOException {
         txtLogger.log("test", 3);
+        Scanner scanner = new Scanner("test.txt");
+        String line = scanner.nextLine();
+        assertEquals(line, "test");
     }
 
     @Test

@@ -50,7 +50,7 @@ public class TxtLogger implements ILogger {
         QUEUE_IS_LOCKED = false;
     }
     public void log(String message, int level) throws IOException {
-        this.logQueue.add(message);
+        this.logQueue.add(message + "\n");
 
         if (!QUEUE_IS_LOCKED)
             emptyQueue();

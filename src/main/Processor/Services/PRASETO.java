@@ -8,12 +8,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class ProcessPackageBoardVersionHHO2020B implements IProcessPackage {
-    private static final ProcessPackageBoardVersionHHO2020B instance = new ProcessPackageBoardVersionHHO2020B();
+public class PRASETO implements IProcessPackage {
+    private static final PRASETO instance = new PRASETO();
 
-    private ProcessPackageBoardVersionHHO2020B() {}
+    private PRASETO() {}
 
-    public static ProcessPackageBoardVersionHHO2020B getInstance() {
+    public static PRASETO getInstance() {
         return instance;
     }
 
@@ -88,7 +88,7 @@ public class ProcessPackageBoardVersionHHO2020B implements IProcessPackage {
 
         //Calculating Uin
 
-        double uin = temp * 0.0048828125 * 10.2338;
+        double uin = temp * 0.004882813 * 10.2157;
         format = dfTwoDec.format(uin);
         uin = Double.parseDouble(format);
 
@@ -118,7 +118,7 @@ public class ProcessPackageBoardVersionHHO2020B implements IProcessPackage {
 
         double amp;
 
-        amp = (double) temp / 8;
+        amp = (double) temp / 4;
         format = dfTwoDec.format(amp);
         amp = Double.parseDouble(format);
 

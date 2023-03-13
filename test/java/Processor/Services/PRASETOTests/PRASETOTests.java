@@ -1,7 +1,9 @@
-package Processor.Services.ProcessPackageBoardVersionHHO2020BTests;
+package Processor.Services.PRASETOTests;
 
 import LocalData.Models.DataPackage;
+import Processor.Services.PRASETO;
 import Processor.Services.ProcessPackageBoardVersionHHO2020B;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -10,17 +12,18 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ProcessPackageTests {
-    private static ProcessPackageBoardVersionHHO2020B processPackageBoardVersionHHO2020B;
+public class PRASETOTests {
+    private static PRASETO PRASETO;
     @BeforeAll
     public static void setUp() {
-        processPackageBoardVersionHHO2020B = ProcessPackageBoardVersionHHO2020B.getInstance();
+        PRASETO = PRASETO.getInstance();
     }
 
     @Test
     public void test() {
+
         assertDoesNotThrow(() -> {
-            DataPackage processedPackage = processPackageBoardVersionHHO2020B.processPackage(new ArrayList<Character>(){
+            DataPackage processedPackage = PRASETO.processPackage(new ArrayList<Character>(){
                 {
                     add((char) 0x3D);
                     add((char) 0x36);
@@ -41,19 +44,18 @@ public class ProcessPackageTests {
                 }
             });
 
-            assertEquals(processedPackage.getAmp(), 29.25);
-            assertEquals(processedPackage.getUin(), 28.28);
+            assertEquals(processedPackage.getAmp(), 58.5);
+            assertEquals(processedPackage.getUin(), 28.23);
             assertEquals(processedPackage.getBar(), 0.393);
             assertEquals(processedPackage.getPwm(), 35.26);
             assertEquals(processedPackage.getTmp(), 29.0);
         });
-
     }
 
     @Test
     public void testWithInvalidData() {
         assertThrows(IllegalArgumentException.class, () -> {
-            processPackageBoardVersionHHO2020B.processPackage(new ArrayList<Character>(){
+            PRASETO.processPackage(new ArrayList<Character>(){
                 {
                     add((char) 0x3D);
                     add((char) 0x36);

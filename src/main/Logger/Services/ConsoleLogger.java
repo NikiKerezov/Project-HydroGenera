@@ -28,7 +28,7 @@ public class ConsoleLogger implements ILogger {
         instance = new ConsoleLogger(logLevel);
     }
 
-    private int LOG_LEVEL = 3; // TODO: get from dependencies
+    private int LOG_LEVEL;
 
     private Queue<String> logQueue;
 

@@ -9,7 +9,11 @@ import Processor.Utils.PrintDataPackage;
 public class Main {
     public static void main(String[] args) {
         ConsoleLogger.setInstance(3);
-        ReadFromSerialPort.setInstance(ProcessPackageBoardVersionGI2CPU28.getInstance(), new UartSetting("COM7", 9600, 8, 1, 0), PrintDataPackage.getInstance());
+        try {
+            ReadFromSerialPort.setInstance(ProcessPackageBoardVersionGI2CPU28.getInstance(), new UartSetting("COM7", 9600, 8, 1, 0), PrintDataPackage.getInstance(), ConsoleLogger.getInstance());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         try {
             ReadFromSerialPort.getInstance().ReadAndProcess();

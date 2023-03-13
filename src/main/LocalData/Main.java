@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class Main {
     public static void main(String[] args) throws Exception {
 
-        DataPackage data = new DataPackage(10, "nz", 1, 2, 3, 4, 5);
+        DataPackage data = new DataPackage(12, "nz", 1, 2, 3, 4, 5);
         SaveToCsv file = SaveToCsv.getInstance("C:\\Users\\Lenovo\\COMport", 7, ConsoleLogger.instance);
 
         file.saveToFile(data);

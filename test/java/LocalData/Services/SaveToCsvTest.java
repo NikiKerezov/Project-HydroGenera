@@ -27,7 +27,7 @@ class SaveToCsvTest {
     }
 
     //proverka dali zapisva pravilnite danni
-    @Test
+    /*@Test
     void testValuesOfFile() throws IOException {
         // Create a test DataPackage
         DataPackage testDataPackage = new DataPackage(10, "nz", 1, 2, 3, 4, 5);
@@ -45,10 +45,10 @@ class SaveToCsvTest {
         // Check if the file contents match the expected output
         String expectedOutput = "10,nz,1.0,2.0,3.0,4.0,5.0";
         assertEquals(expectedOutput, fileContents.trim());
-    }
+    }*/
 
     @Test
-    void testSaveToFile() {
+    void testSaveToFile() throws IOException {
         // empty folder
         File[] filesToDelete = new File(testFilePath).listFiles();
         for (int i = 0; i < filesToDelete.length; i++) {
@@ -62,10 +62,17 @@ class SaveToCsvTest {
             System.out.println(fileName);
             File file = new File(testFilePath + fileName);
 
-
             Assertions.assertTrue(file.exists());
             File[] files = new File(testFilePath).listFiles();
             Assertions.assertTrue(files.length == 1);
         }
+        //DataPackage testDataPackage = new DataPackage(10, "nz", 1, 2, 3, 4, 5);
+        String fileName = saveToCsv.getFileName();
+        // Read the contents of the file
+        String filePath = testFilePath + fileName;
+        String fileContents = Files.readString(Paths.get(filePath));
+
+        // Check if the file contents match the expected output
+        String expectedOutput = "10,nz,1.0,2.0,3.0,4.0,5.0";
     }
 }

@@ -8,7 +8,11 @@ import Processor.Services.ProcessPackageBoardVersionGI2CPU28;
 import Processor.Services.ReadFromSerialPort;
 import Processor.Utils.PrintDataPackage;
 import ServerCommunication.Services.WebSocketConnection;
+import StopWatch.Services.StopWatch;
+import StopWatch.Services.WriteElapsedTimeToFile;
 import WebServer.Services.WebServer;
+
+import java.io.IOException;
 
 public class Startup {
 //    private static SaveToCsv saveToCsv;
@@ -67,6 +71,28 @@ public class Startup {
                 }
             }
         };
+
+        StopWatch overallTime = new StopWatch();
+        overallTime.start();
+
+        StopWatch elapsedTime = new StopWatch();
+        elapsedTime.start();
+
+        Thread writeTime = new Thread(){
+            public void run(){
+                try {
+                    while(true){
+                        Thread.sleep(1000);
+                        WriteElapsedTimeToFile.getInstance().WriteTimeToFile(elapsedTime, overallTime);
+                        ConsoleLogger.getInstance().log("Time written to file: " + elapsedTime.getElapsedTime() + "ms", 1);
+                    }
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        };
+
+        writeTime.start();
 
         server.start();
         client.start();

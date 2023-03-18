@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import DependancyContainer.Contracts.IJsonReader;
-import DependancyContainer.Services.Data;
+import DependancyContainer.Models.Setting;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
@@ -16,8 +16,8 @@ public class JsonReader implements IJsonReader {
     }
 
     @Override
-    public Data readJson(String filePath) throws IOException {
+    public Setting readJson(String filePath) throws IOException {
         File jsonFile = new File(filePath);
-        return mapper.readValue(jsonFile, Data.class);
+        return mapper.readValue(jsonFile, Setting.class);
     }
 }

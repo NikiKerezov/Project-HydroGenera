@@ -1,5 +1,7 @@
 package Processor.Contracts;
 
+import java.io.IOException;
+
 public interface IReadFromSerialPort {
-    public void ReadAndProcess();
+    void ReadAndProcess() throws IOException;
 }

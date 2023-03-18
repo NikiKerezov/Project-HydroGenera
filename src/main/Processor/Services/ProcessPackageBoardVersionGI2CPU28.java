@@ -3,6 +3,8 @@ package Processor.Services;
 import LocalData.Models.DataPackage;
 import Processor.Contracts.IProcessPackage;
 
+import java.lang.management.ManagementFactory;
+import java.lang.management.RuntimeMXBean;
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -129,7 +131,8 @@ public class ProcessPackageBoardVersionGI2CPU28 implements IProcessPackage {
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime timestamp = LocalDateTime.now();
+        RuntimeMXBean mxBean = ManagementFactory.getRuntimeMXBean();
 
-        return new DataPackage(address, timestamp.toString(), amp, tmp, pwm, bar, uin);
+        return new DataPackage(address, timestamp.toString(), amp, tmp, pwm, bar, uin, Long.toString(mxBean.getUptime()/1000));
     }
 }

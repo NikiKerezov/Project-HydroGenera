@@ -1,9 +1,9 @@
 package DependancyContainer.Contracts;
 
-import DependancyContainer.Services.Data;
+import DependancyContainer.Models.Setting;
 
 import java.io.IOException;
 
 public interface IJsonReader {
-    Data readJson(String filePath) throws IOException;
+    Setting readJson(String filePath) throws IOException;
 }

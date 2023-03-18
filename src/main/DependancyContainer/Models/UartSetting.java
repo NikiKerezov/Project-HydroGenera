@@ -11,13 +11,13 @@ public class UartSetting {
         // Default constructor required by Jackson
     }
 
-    public UartSetting(String port, int baudRate, int dataBits, int stopBits, int parity) {
-        this.port = port;
-        this.baudRate = baudRate;
-        this.dataBits = dataBits;
-        this.stopBits = stopBits;
-        this.parity = parity;
-    }
+//    public UartSetting(String port, int baudRate, int dataBits, int stopBits, int parity) {
+//        this.port = port;
+//        this.baudRate = baudRate;
+//        this.dataBits = dataBits;
+//        this.stopBits = stopBits;
+//        this.parity = parity;
+//    }
 
     public String getPort() {
         return port;

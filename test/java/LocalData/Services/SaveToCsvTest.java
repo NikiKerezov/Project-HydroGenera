@@ -21,7 +21,7 @@ class SaveToCsvTest {
 
     @BeforeAll
     static void setUp() throws IOException {
-        saveToCsv = SaveToCsv.getInstance(testFilePath, lifespanInDays, logger);
+        saveToCsv = SaveToCsv.getInstance();
         saveToCsv.createFolder();
         System.out.println("createFolder");
     }

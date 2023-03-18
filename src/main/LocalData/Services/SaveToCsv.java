@@ -24,11 +24,15 @@ public class SaveToCsv extends Observer implements ISaveToFile {
     private ILogger logger;
 
     //s
-    public static SaveToCsv getInstance(String path, int lifespan_in_days, ILogger logger) throws IOException {
+    public static SaveToCsv getInstance() throws IOException {
         if (instance == null) {
-            instance = new SaveToCsv(path, lifespan_in_days, logger);
+            throw new IllegalStateException("SaveToFile not initialized");
         }
         return instance;
+    }
+
+    public static void setInstance(String path, int lifespan_in_days, ILogger logger) throws IOException {
+        instance = new SaveToCsv(path, lifespan_in_days, logger);
     }
 
     private SaveToCsv(String path, int lifespan_in_days, ILogger logger) throws IOException {
@@ -81,16 +85,19 @@ public class SaveToCsv extends Observer implements ISaveToFile {
             return;
         }
         for (File f : files) {
-            if (f.exists() && f.getName().length()==28 && f.getName().endsWith(".csv")){
+            if (f.exists() && f.getName().endsWith(".csv")){
                 String fileName = f.getName();
                 // Get the timestamp from the file name
                 String timestampString = fileName.substring(9, fileName.indexOf(".csv"));
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+                logger.log(timestampString, 3);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss.ms");
+
                 try {
                     // Convert the timestamp string to a date
                     Date timestamp = sdf.parse(timestampString);
                     if (timestamp.getTime() < lifespan) {
                         f.delete();
+                        logger.log("File deleted", 3);
                     }
                 } catch (ParseException e) {
                     logger.log("Exception thrown: " + e.getMessage(), 1);

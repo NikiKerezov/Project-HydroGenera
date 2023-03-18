@@ -1,5 +1,6 @@
 package EventEmitter;
 
+import EventEmitter.Contracts.IObserver;
 import LocalData.Models.DataPackage;
 
 import java.io.IOException;
@@ -18,7 +19,7 @@ public class EventEmitter {
         return instance;
     }
 
-    private final ArrayList<Observer> observers = new ArrayList<Observer>();
+    private final ArrayList<IObserver> observers = new ArrayList<IObserver>();
     private int state;
 
     private DataPackage dataPackage;
@@ -40,16 +41,17 @@ public class EventEmitter {
         notifyAllObservers(dataPackage);
     }
 
-    public void attach(Observer observer){
+    public void attach(IObserver observer){
         observers.add(observer);
     }
 
-    public void detach(Observer observer){
+    public void detach(IObserver observer){
         observers.remove(observer);
     }
 
     public void notifyAllObservers(DataPackage dataPackage){
-        for (Observer observer : observers) {
+
+        for (IObserver observer : observers) {
             workQueue.execute(new Runnable() {
                 @Override
                 public void run() {

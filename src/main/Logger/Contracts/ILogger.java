@@ -1,5 +1,7 @@
 package Logger.Contracts;
 
+import EventEmitter.Contracts.IObserver;
+
 import java.io.IOException;
 
 public interface ILogger {

@@ -5,7 +5,17 @@ public class DataPackage {
     private int adr;
     private String timestamp;
 
-    public DataPackage(int adr, String timestamp, double amp, double tmp, double pwm, double bar, double uin) {
+    public String getUptime() {
+        return uptime;
+    }
+
+    public void setUptime(String uptime) {
+        this.uptime = uptime;
+    }
+
+    private String uptime;
+
+    public DataPackage(int adr, String timestamp, double amp, double tmp, double pwm, double bar, double uin, String uptime) {
         //this.id = settings.getBoardId
         this.adr = adr;
         this.timestamp = timestamp;
@@ -14,6 +24,7 @@ public class DataPackage {
         this.bar = bar;
         this.uin = uin;
         this.pwm = pwm;
+        this.uptime = uptime;
     }
     public int getAdr() {
         return adr;

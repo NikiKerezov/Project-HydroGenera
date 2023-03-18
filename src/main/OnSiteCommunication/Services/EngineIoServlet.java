@@ -1,8 +1,9 @@
-package WebServer.Services;
+package OnSiteCommunication.Services;
 
 import io.socket.engineio.server.Emitter;
 import io.socket.engineio.server.EngineIoServer;
 import io.socket.engineio.server.EngineIoSocket;
+
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,6 +26,7 @@ public class EngineIoServlet extends HttpServlet {
         mEngineIoServer.on("connection", new Emitter.Listener() {
             @Override
             public void call(Object... args) {
+                System.out.println("Connected");
                 EngineIoSocket socket = (EngineIoSocket) args[0];
                 // Do something with socket
             }

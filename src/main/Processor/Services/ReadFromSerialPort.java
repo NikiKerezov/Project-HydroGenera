@@ -6,14 +6,18 @@ import LocalData.Models.DataPackage;
 import Logger.Contracts.ILogger;
 import Logger.Services.ConsoleLogger;
 import Processor.Contracts.IProcessPackage;
+import Processor.Contracts.IReadFromSerialPort;
 import Processor.Utils.PrintDataPackage;
 import com.fazecast.jSerialComm.SerialPort;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.management.ManagementFactory;
+import java.lang.management.RuntimeMXBean;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-public class ReadFromSerialPort {
+public class ReadFromSerialPort implements IReadFromSerialPort {
 
     private static ReadFromSerialPort instance;
     private final IProcessPackage processPackage;
@@ -61,7 +65,7 @@ public class ReadFromSerialPort {
             else {
                 throw new RuntimeException("Port is not open");
             }
-            ArrayList<Character> input = new ArrayList<>();
+            ArrayList<Character> input = new ArrayList<Character>();
 
             System.out.println("Opened port: " + serialPort.getSystemPortName());
 
@@ -81,7 +85,7 @@ public class ReadFromSerialPort {
                     if ((numRead == 0x0a && input.size() != 16 && flag == 0)) {
                         flag = 1;
                         input.clear();
-                        logger.log("Clearing buffer", 3);
+                        //logger.log("Clearing buffer", 3);
                         continue;
                     }
 
@@ -96,7 +100,7 @@ public class ReadFromSerialPort {
                         EventEmitter.getInstance().setDataPackage(dataPackage);
                         EventEmitter.getInstance().notifyAllObservers(dataPackage);
 
-                        printDataPackage.printPackage(dataPackage);
+                        //printDataPackage.printPackage(dataPackage);
                     }
 
                     if (input.size() >= 16) {
@@ -104,7 +108,7 @@ public class ReadFromSerialPort {
                     }
 
                 } catch (Exception exception) {
-                    logger.log("Exception throws: " + exception.getMessage(), 1);
+                    //logger.log("Exception throws: " + exception.getMessage(), 1);
                 }
         }
     }

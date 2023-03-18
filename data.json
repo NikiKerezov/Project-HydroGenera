@@ -20,11 +20,11 @@
   "localDataSettings":{
     "dataLifespan":7, 
     "fileFormat":"csv",
-    "path": "C:\\Users\\golqm\\Documents\\HydroGenera\\HydroGeneraSingleAEM\\Project-HydroGenera"
+    "path": "C:\\Users\\golqm\\Documents\\HydroGenera\\Data"
   },
 
   "uartSetting":{
-    "port":"/dev/ttyUSB0",
+    "port": "COM13",
     "baudRate": 9600,
     "dataBits": 8,
     "stopBits": 1,

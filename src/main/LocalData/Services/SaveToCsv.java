@@ -50,12 +50,12 @@ public class SaveToCsv extends Observer implements ISaveToFile {
             File file = new File(path, fileName);
             writer = new OutputStreamWriter(new FileOutputStream(file), "UTF-8");
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.log("Exception: "+e, 1);
         }
     }
 
     @Override
-    public void update(DataPackage dataPackage){
+    public void update(DataPackage dataPackage) throws IOException {
         saveToFile(dataPackage);
     }
 
@@ -66,12 +66,12 @@ public class SaveToCsv extends Observer implements ISaveToFile {
         }
     }
 
-    public void saveToFile(DataPackage dataPackage) {
+    public void saveToFile(DataPackage dataPackage) throws IOException {
         try {
             writer.write(CSVUtils.toCSV(dataPackage));
             writer.flush();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.log("Exception: "+e, 1);
         }
     }
 
@@ -89,7 +89,6 @@ public class SaveToCsv extends Observer implements ISaveToFile {
                 String fileName = f.getName();
                 // Get the timestamp from the file name
                 String timestampString = fileName.substring(9, fileName.indexOf(".csv"));
-                logger.log(timestampString, 3);
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss.ms");
 
                 try {

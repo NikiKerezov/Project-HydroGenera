@@ -1,3 +1,4 @@
+package startup;
 import DependancyContainer.Models.ServiceContainer;
 import DependancyContainer.Services.DependencyContainerService;
 import EventEmitter.EventEmitter;
@@ -10,7 +11,7 @@ public class Startup {
         ServiceContainer container = ServiceContainer.container();
 
         EventEmitter.getInstance().attach(container.getFileStorage());
-        EventEmitter.getInstance().attach(container.getDataRiver());
+       // EventEmitter.getInstance().attach(container.getDataRiver());
         EventEmitter.getInstance().attach(container.getOnSite());
 
         Thread server = new Thread(() -> {

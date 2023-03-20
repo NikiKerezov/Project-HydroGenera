@@ -56,7 +56,7 @@ class SaveToCsvTest {
         }
 
         for (int i = 0; i < 3; i++) {
-            DataPackage testDataPackage = new DataPackage(10, "nz", 1, 2, 3, 4, 5);
+            DataPackage testDataPackage = new DataPackage(10, "nz", 1, 2, 3, 4, 5, "12");
             saveToCsv.saveToFile(testDataPackage);
             String fileName = saveToCsv.getFileName();
             System.out.println(fileName);

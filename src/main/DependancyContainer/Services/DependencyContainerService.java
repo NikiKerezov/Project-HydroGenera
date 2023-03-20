@@ -9,6 +9,7 @@ import Logger.Services.ConsoleLogger;
 import Logger.Services.TxtLogger;
 import OnSiteCommunication.Services.OnSiteCommunication;
 import Processor.Services.ProcessPackageBoardVersionGI2CPU28;
+import Processor.Services.ProcessPackageBoardVersionHHO2020B;
 import Processor.Services.ReadFromSerialPort;
 import Processor.Utils.PrintDataPackage;
 
@@ -32,10 +33,15 @@ public class DependencyContainerService {
         }
 
         switch (dependencies.getGeneratorSetting().getUinChip()){
-            case "A1":
-                ReadFromSerialPort.setInstance(ProcessPackageBoardVersionGI2CPU28.getInstance(), dependencies.getUartSetting(), PrintDataPackage.getInstance(), ConsoleLogger.getInstance());
+            case "GI2CPU28":
+                ReadFromSerialPort.setInstance(ProcessPackageBoardVersionGI2CPU28.getInstance(), dependencies.getUartSetting(), PrintDataPackage.getInstance(), container.getLogger());
                 container.setSerialPort(ReadFromSerialPort.getInstance());
                 break;
+            case "HHO2020B":
+                ReadFromSerialPort.setInstance(ProcessPackageBoardVersionHHO2020B.getInstance(), dependencies.getUartSetting(), PrintDataPackage.getInstance(), container.getLogger());
+                container.setSerialPort(ReadFromSerialPort.getInstance());
+                break;
+
         }
 
         switch (dependencies.getLocalDataSettings().getFileFormat()){

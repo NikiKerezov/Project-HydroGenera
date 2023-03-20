@@ -18,7 +18,7 @@ public class DependencyContainerService {
     public ServiceContainer populateContainer() throws Exception {
 
         IJsonReader jsonReader = new JsonReader();
-        Setting dependencies = jsonReader.readJson("C:\\Users\\golqm\\Documents\\HydroGenera\\HydroGeneraSingleAEM\\Project-HydroGenera\\data.json");
+        Setting dependencies = jsonReader.readJson("/home/hmonitor/hMonitor/config/config.json");
         ServiceContainer container = new ServiceContainer();
 
         switch (dependencies.getLogSettings().getLogType()){

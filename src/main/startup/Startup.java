@@ -29,26 +29,22 @@ public class Startup {
             }
         });
 
-//        StopWatch overallTime = new StopWatch();
-//        overallTime.start();
-//
-//        StopWatch elapsedTime = new StopWatch();
-//        elapsedTime.start();
+        long prevTime = WriteElapsedTimeToFile.getInstance().getPreviousTime();
 
-//        Thread writeTime = new Thread(){
-//            public void run(){
-//                try {
-//                    while(true){
-//                        Thread.sleep(1000);
-//                        WriteElapsedTimeToFile.getInstance().WriteTimeToFile(elapsedTime, overallTime);
-//                    }
-//                } catch (Exception e) {
-//                    throw new RuntimeException(e);
-//                }
-//            }
-//        };
+        Thread writeTime = new Thread(){
+            public void run(){
+                try {
+                    while(true){
+                        Thread.sleep(1000);
+                        WriteElapsedTimeToFile.getInstance().WriteTimeToFile(prevTime);
+                    }
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                   }
+              }
+        };
 
-//        writeTime.start();
+        writeTime.start();
 
         server.start();
         //client.start();

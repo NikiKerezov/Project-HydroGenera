@@ -1,10 +1,11 @@
 package StopWatch.Services;
 
-import StopWatch.Contracts.IStopWatch;
 import StopWatch.Contracts.IWriteElapsedTimeToFile;
 
+import javax.management.MXBean;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.management.RuntimeMXBean;
 import java.util.Scanner;
 
 public class WriteElapsedTimeToFile implements IWriteElapsedTimeToFile {
@@ -21,35 +22,39 @@ public class WriteElapsedTimeToFile implements IWriteElapsedTimeToFile {
     private WriteElapsedTimeToFile() {
     }
 
-    public void WriteTimeToFile(IStopWatch elapsedTime, IStopWatch overallTime) throws IOException {
+    public long getPreviousTime() throws IOException {
+        Scanner scanner1 = new Scanner("time1");
+        Scanner scanner2 = new Scanner("time2");
+
+        long previousTime1 = scanner1.nextLong();
+        long previousTime2 = scanner2.nextLong();
+
+        scanner1.close();
+        scanner2.close();
+
+        return Math.max(previousTime1, previousTime2);
+    }
+
+    public void WriteTimeToFile(long previousTime) throws IOException {
         FileWriter fileWriter1 = new FileWriter("time1", false);
         FileWriter fileWriter2 = new FileWriter("time2", false);
 
-        fileWriter1.write("" + elapsedTime.getElapsedTime());
-        fileWriter2.write("" + elapsedTime.getElapsedTime());
+        RuntimeMXBean runtimeMXBean = java.lang.management.ManagementFactory.getRuntimeMXBean();
+        long uptime = runtimeMXBean.getUptime();
+
+        fileWriter1.write("" + uptime);
+        fileWriter2.write("" + uptime);
 
         fileWriter1.close();
         fileWriter2.close();
 
         fileWriter1 = new FileWriter("overallTime1", false);
-        fileWriter1 = new FileWriter("overallTime2", false);
+        fileWriter2 = new FileWriter("overallTime2", false);
 
-        Scanner scanner1 = new Scanner("overallTime1");
-        Scanner scanner2 = new Scanner("overallTime2");
-
-        long overallTime1 = scanner1.nextLong();
-        long overallTime2 = scanner2.nextLong();
-
-        overallTime.reset();
-        overallTime.start();
-
-        fileWriter1.write("" + (overallTime1 + overallTime.getElapsedTime()));
-        fileWriter2.write("" + (overallTime2 + overallTime.getElapsedTime()));
+        fileWriter1.write("" + (previousTime + uptime));
+        fileWriter2.write("" + (previousTime + uptime));
 
         fileWriter1.close();
         fileWriter2.close();
-
-        scanner1.close();
-        scanner2.close();
     }
 }

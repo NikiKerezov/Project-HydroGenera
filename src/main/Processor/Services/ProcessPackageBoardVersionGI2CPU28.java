@@ -2,6 +2,7 @@ package Processor.Services;
 
 import LocalData.Models.DataPackage;
 import Processor.Contracts.IProcessPackage;
+import UpTime.Services.UpTime;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
@@ -133,6 +134,6 @@ public class ProcessPackageBoardVersionGI2CPU28 implements IProcessPackage {
         LocalDateTime timestamp = LocalDateTime.now();
         RuntimeMXBean mxBean = ManagementFactory.getRuntimeMXBean();
 
-        return new DataPackage(address, timestamp.toString(), amp, tmp, pwm, bar, uin, Long.toString(mxBean.getUptime()/1000));
+        return new DataPackage(address, timestamp.toString(), amp, tmp, pwm, bar, uin, Long.toString(mxBean.getUptime()/1000 + UpTime.getInstance().getPreviousTime()));
     }
 }

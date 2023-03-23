@@ -1,28 +1,26 @@
-package StopWatch.Services;
+package UpTime.Services;
 
-import StopWatch.Contracts.IWriteElapsedTimeToFile;
+import UpTime.Contracts.IUpTime;
 
-import javax.management.MXBean;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.management.RuntimeMXBean;
 import java.util.Scanner;
 
-public class WriteElapsedTimeToFile implements IWriteElapsedTimeToFile {
+public class UpTime implements IUpTime {
 
-    public static WriteElapsedTimeToFile instance;
+    public static UpTime instance;
 
-    public static WriteElapsedTimeToFile getInstance() {
+    private final long previousTime;
+
+    public static UpTime getInstance() {
         if (instance == null) {
-            instance = new WriteElapsedTimeToFile();
+            instance = new UpTime();
         }
         return instance;
     }
 
-    private WriteElapsedTimeToFile() {
-    }
-
-    public long getPreviousTime() throws IOException {
+    private UpTime() {
         Scanner scanner1 = new Scanner("time1");
         Scanner scanner2 = new Scanner("time2");
 
@@ -32,15 +30,19 @@ public class WriteElapsedTimeToFile implements IWriteElapsedTimeToFile {
         scanner1.close();
         scanner2.close();
 
-        return Math.max(previousTime1, previousTime2);
+        previousTime =  Math.max(previousTime1, previousTime2);
     }
 
-    public void WriteTimeToFile(long previousTime) throws IOException {
+    public long getPreviousTime() {
+        return previousTime;
+    }
+
+    public void WriteTimeToFile() throws IOException {
         FileWriter fileWriter1 = new FileWriter("time1", false);
         FileWriter fileWriter2 = new FileWriter("time2", false);
 
         RuntimeMXBean runtimeMXBean = java.lang.management.ManagementFactory.getRuntimeMXBean();
-        long uptime = runtimeMXBean.getUptime();
+        long uptime = runtimeMXBean.getUptime() / 1000;
 
         fileWriter1.write("" + uptime);
         fileWriter2.write("" + uptime);

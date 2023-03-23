@@ -1,15 +1,13 @@
 package startup;
 import DependancyContainer.Models.ServiceContainer;
-import DependancyContainer.Services.DependencyContainerService;
 import EventEmitter.EventEmitter;
-import StopWatch.Services.*;
+import UpTime.Services.*;
 
 public class Startup {
 
     public static void main(String[] args) throws Exception {
 
         ServiceContainer container = ServiceContainer.container();
-
         EventEmitter.getInstance().attach(container.getFileStorage());
        // EventEmitter.getInstance().attach(container.getDataRiver());
         EventEmitter.getInstance().attach(container.getOnSite());
@@ -29,14 +27,12 @@ public class Startup {
             }
         });
 
-        long prevTime = WriteElapsedTimeToFile.getInstance().getPreviousTime();
-
         Thread writeTime = new Thread(){
             public void run(){
                 try {
                     while(true){
                         Thread.sleep(1000);
-                        WriteElapsedTimeToFile.getInstance().WriteTimeToFile(prevTime);
+                        UpTime.getInstance().WriteTimeToFile();
                     }
                 } catch (Exception e) {
                     throw new RuntimeException(e);

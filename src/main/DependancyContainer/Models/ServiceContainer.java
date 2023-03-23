@@ -6,15 +6,16 @@ import LocalData.Contracts.ISaveToFile;
 import Logger.Contracts.ILogger;
 import OnSiteCommunication.Contracts.IOnSiteCommunication;
 import Processor.Contracts.IReadFromSerialPort;
+import UpTime.Contracts.IUpTime;
+import UpTime.Services.UpTime;
 
 public class ServiceContainer {
-
-
     private static ServiceContainer container;
     private IDataRiverCommunication dataRiver;
     private IReadFromSerialPort serialPort;
     private IOnSiteCommunication onSite;
     private ILogger logger;
+    private IUpTime upTime;
 
     public static ServiceContainer container() {
         if(container == null){
@@ -69,5 +70,19 @@ public class ServiceContainer {
         this.onSite = onSite;
     }
 
+    public static ServiceContainer getContainer() {
+        return container;
+    }
 
+    public static void setContainer(ServiceContainer container) {
+        ServiceContainer.container = container;
+    }
+
+    public IUpTime getUpTime() {
+        return upTime;
+    }
+
+    public void setUpTime(IUpTime upTime) {
+        this.upTime = upTime;
+    }
 }

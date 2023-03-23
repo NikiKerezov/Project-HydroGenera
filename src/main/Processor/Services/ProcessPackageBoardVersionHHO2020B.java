@@ -2,12 +2,12 @@ package Processor.Services;
 
 import LocalData.Models.DataPackage;
 import Processor.Contracts.IProcessPackage;
+import UpTime.Services.UpTime;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class ProcessPackageBoardVersionHHO2020B implements IProcessPackage {
@@ -131,6 +131,6 @@ public class ProcessPackageBoardVersionHHO2020B implements IProcessPackage {
         LocalDateTime timestamp = LocalDateTime.now();
         RuntimeMXBean mxBean = ManagementFactory.getRuntimeMXBean();
 
-        return new DataPackage(address, timestamp.toString(), amp, tmp, pwm, bar, uin, Long.toString(mxBean.getUptime()/1000));
+        return new DataPackage(address, timestamp.toString(), amp, tmp, pwm, bar, uin, Long.toString(mxBean.getUptime()/1000 + UpTime.getInstance().getPreviousTime()));
     }
 }

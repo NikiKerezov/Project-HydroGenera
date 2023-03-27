@@ -43,7 +43,7 @@ public class TxtLogger implements ILogger {
             FileWriter fileWriter = new FileWriter(LOG_FILE_PATH, true);
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
             LocalDateTime now = LocalDateTime.now();
-            fileWriter.write(now + ": " + this.logQueue.poll());
+            fileWriter.write(now + ": " + this.logQueue.poll() + "\n");
             fileWriter.close();
         }
 

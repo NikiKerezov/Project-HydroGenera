@@ -131,6 +131,6 @@ public class PRASETO implements IProcessPackage {
         LocalDateTime timestamp = LocalDateTime.now();
         RuntimeMXBean mxBean = ManagementFactory.getRuntimeMXBean();
 
-        return new DataPackage(address, timestamp.toString(), amp, tmp, pwm, bar, uin, Long.toString(mxBean.getUptime()/1000 + UpTime.instance.getPreviousTime()));
+        return new DataPackage(address, timestamp.toString(), amp, tmp, pwm, bar, uin, Long.toString(mxBean.getUptime()/1000), Long.toString(mxBean.getUptime()/1000 + UpTime.instance.getPreviousTime()));
     }
 }

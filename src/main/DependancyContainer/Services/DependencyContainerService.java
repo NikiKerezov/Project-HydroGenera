@@ -18,7 +18,7 @@ public class DependencyContainerService {
     public ServiceContainer populateContainer() throws Exception {
 
         IJsonReader jsonReader = new JsonReader();
-        Setting dependencies = jsonReader.readJson("/home/hmonitor/hMonitor/config/config.json");
+        Setting dependencies = jsonReader.readJson("data.json");
         ServiceContainer container = new ServiceContainer();
 
         switch (dependencies.getLogSettings().getLogType()){

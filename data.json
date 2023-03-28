@@ -14,17 +14,17 @@
   "logSettings":{
     "logType":"Console",
     "logLevel":3,
-    "logPath":"C:\\Users\\golqm\\Documents\\HydroGenera\\HydroGeneraSingleAEM\\Project-HydroGenera\\Logger\\log.txt"
+    "logPath":"log.txt"
   },
 
   "localDataSettings":{
     "dataLifespan":7, 
     "fileFormat":"csv",
-    "path": "C:\\Users\\golqm\\Documents\\HydroGenera\\Data"
+    "path": "Data"
   },
 
   "uartSetting":{
-    "port": "COM13",
+    "port": "COM7",
     "baudRate": 9600,
     "dataBits": 8,
     "stopBits": 1,

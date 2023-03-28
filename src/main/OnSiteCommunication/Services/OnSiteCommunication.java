@@ -1,15 +1,11 @@
 package OnSiteCommunication.Services;
 
-import DataRiverCommunication.Services.DataRiverCommunication;
-import DependancyContainer.Models.Setting;
 import EventEmitter.Observer;
 import LocalData.Models.DataPackage;
 import Logger.Contracts.ILogger;
-import DataRiverCommunication.Contracts.IDataRiverCommunication;
 import OnSiteCommunication.Contracts.IOnSiteCommunication;
 import io.socket.client.IO;
 import io.socket.client.Socket;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -40,6 +36,27 @@ public class OnSiteCommunication extends Observer implements IOnSiteCommunicatio
     public void startServer(){
         connect();
     }
+
+    @Override
+    public void receiveJson(JSONObject data) {
+        try {
+            String filePath = "/home/hmonitor/hMonitor/config/config.json";
+            Path path = Paths.get(filePath);
+            if (!Files.exists(path)) {
+                File file = new File(filePath);
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+            }
+            FileWriter fileWriter = new FileWriter(filePath, false);
+            fileWriter.write(data.toString());
+            fileWriter.flush();
+            fileWriter.close();
+            System.out.println("New setting received and saved to file: " + filePath);
+        } catch (IOException e) {
+            System.err.println("Error while saving setting to file: " + e.getMessage());
+        }
+    }
+
     public void connect(){
         socket.open();
     }
@@ -61,24 +78,6 @@ public class OnSiteCommunication extends Observer implements IOnSiteCommunicatio
         }
         catch (Exception e){
             logger.log("Exception throws: " + e.getMessage(), 2);
-        }
-    }
-    public void receiveJson(JSONObject data) {
-        try {
-            String filePath = "/home/hmonitor/hMonitor/config/config.json";
-            Path path = Paths.get(filePath);
-            if (!Files.exists(path)) {
-                File file = new File(filePath);
-                file.getParentFile().mkdirs();
-                file.createNewFile();
-            }
-            FileWriter fileWriter = new FileWriter(filePath, false);
-            fileWriter.write(data.toString());
-            fileWriter.flush();
-            fileWriter.close();
-            System.out.println("New setting received and saved to file: " + filePath);
-        } catch (IOException e) {
-            System.err.println("Error while saving setting to file: " + e.getMessage());
         }
     }
 

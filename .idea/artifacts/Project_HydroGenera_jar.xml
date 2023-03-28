@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="Project-HydroGenera:jar">
+  <artifact type="jar" build-on-make="true" name="Project-HydroGenera:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/Project_HydroGenera_jar</output-path>
     <root id="archive" name="Project-HydroGenera.jar">
       <element id="directory" name="META-INF">

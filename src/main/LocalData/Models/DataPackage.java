@@ -91,4 +91,17 @@ public class DataPackage {
     public void setPwm(double pwm) {
         this.pwm = pwm;
     }
+
+    @Override
+    public String toString() {
+        return
+                "amp=" + amp +
+                ", tmp=" + tmp +
+                ", bar=" + bar +
+                ", uin=" + uin +
+                ", pwm=" + pwm +
+                ", adr=" + adr +
+                ", timestamp='" + timestamp + '\'' +
+                ", uptime='" + uptime;
+    }
 }

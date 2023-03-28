@@ -67,7 +67,7 @@ public class ReadFromSerialPort implements IReadFromSerialPort {
             }
             ArrayList<Character> input = new ArrayList<Character>();
 
-            System.out.println("Opened port: " + serialPort.getSystemPortName());
+            logger.log("Opened port: " + serialPort.getSystemPortName(), 1);
 
             //clear buffer
 
@@ -85,7 +85,7 @@ public class ReadFromSerialPort implements IReadFromSerialPort {
                     if ((numRead == 0x0a && input.size() != 16 && flag == 0)) {
                         flag = 1;
                         input.clear();
-                        //logger.log("Clearing buffer", 3);
+                        logger.log("Clearing buffer", 3);
                         continue;
                     }
 
@@ -100,15 +100,16 @@ public class ReadFromSerialPort implements IReadFromSerialPort {
                         EventEmitter.getInstance().setDataPackage(dataPackage);
                         EventEmitter.getInstance().notifyAllObservers(dataPackage);
 
-                        //printDataPackage.printPackage(dataPackage);
+                        logger.log(dataPackage.toString(), 3);
                     }
 
                     if (input.size() >= 16) {
+                        logger.log("Clearing buffer", 3);
                         input.clear();
                     }
 
                 } catch (Exception exception) {
-                    //logger.log("Exception throws: " + exception.getMessage(), 1);
+                    logger.log("Exception throws: " + exception.getMessage(), 1);
                 }
         }
     }

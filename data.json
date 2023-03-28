@@ -12,7 +12,7 @@
   },
 
   "logSettings":{
-    "logType":"Console",
+    "logType":"File",
     "logLevel":3,
     "logPath":"log.txt"
   },

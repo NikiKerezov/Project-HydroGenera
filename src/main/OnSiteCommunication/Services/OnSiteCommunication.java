@@ -40,7 +40,7 @@ public class OnSiteCommunication extends Observer implements IOnSiteCommunicatio
     @Override
     public void receiveJson(JSONObject data) {
         try {
-            String filePath = "/home/hmonitor/hMonitor/config/config.json";
+            String filePath = "data.json";
             Path path = Paths.get(filePath);
             if (!Files.exists(path)) {
                 File file = new File(filePath);
@@ -59,7 +59,9 @@ public class OnSiteCommunication extends Observer implements IOnSiteCommunicatio
 
     public void connect(){
         socket.open();
+        startListening();
     }
+
     @Override
     public void update(DataPackage dataPackage) throws IOException {
 
@@ -70,22 +72,27 @@ public class OnSiteCommunication extends Observer implements IOnSiteCommunicatio
     public void sendPackage(DataPackage dataPackage) throws IOException {
         try{
             if (!socket.connected()) {
-                logger.log("Socket is not connected", 1);
+                logger.log("Socket is not connected", 2);
                 return;
             }
             socket.emit("new_data",new JSONObject(dataPackage));
 
         }
         catch (Exception e){
-            logger.log("Exception throws: " + e.getMessage(), 2);
+            logger.log("Exception throws: " + e.getMessage(), 1);
         }
     }
 
     public void startListening() {
         socket.on("new_setting", (data) -> {
-            System.out.println("New setting received: " + data);
+            System.out.println("New setting received: " + data.toString());
             JSONObject jsonData = new JSONObject(data);
-            receiveJson(jsonData);
+            try {
+                logger.log(jsonData.toString(), 1);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+//            receiveJson(jsonData);
             socket.emit("new_setting", data);
         });
     }

@@ -1,0 +1,119 @@
+2023-03-28T20:16:08.218894100: Exception: java.io.FileNotFoundException: Data\timestamp2023-03-28 20-16-08.168.csv (The system cannot find the path specified)
+
+2023-03-28T20:16:18.694436: {}
+
+2023-03-29T09:02:45.736078300: Exception: java.io.FileNotFoundException: Data\timestamp2023-03-29 09-02-45.245.csv (The system cannot find the path specified)
+
+2023-03-29T09:04:49.642659400: Exception: java.io.FileNotFoundException: Data\timestamp2023-03-29 09-04-49.449.csv (The system cannot find the path specified)
+
+2023-03-29T09:05:56.643041500: Exception: java.io.FileNotFoundException: Data\timestamp2023-03-29 09-05-56.556.csv (The system cannot find the path specified)
+
+2023-03-29T09:05:59.274708400: Was here
+
+2023-03-29T09:05:59.278255800: {
+   "communication": {
+      "circuit": "UART",
+      "visualisation": "WebSocket",
+      "server": "WebSocket"
+   },
+   "generatorSetting": {
+      "cellCount": "8",
+      "id": "0",
+      "uinChip": "HHO2020B"
+   },
+   "logSettings": {
+      "logType": "Console",
+      "logLevel": "3",
+      "logPath": "C:\\Users\\golqm\\Documents\\HydroGenera\\HydroGeneraSingleAEM\\Project-HydroGenera\\Logger\\log.txt"
+   },
+   "localDataSettings": {
+      "dataLifespan": "7",
+      "fileFormat": "csv",
+      "path": "C:\\Users\\golqm\\Documents\\HydroGenera\\Data"
+   },
+   "uartSetting": {
+      "port": "COM13",
+      "baudRate": "9600",
+      "dataBits": "9",
+      "stopBits": "1",
+      "parity": "0"
+   },
+   "serverSettings": {
+      "url": "ws://socket.statistics.green-innovation.bg"
+   }
+}
+
+2023-03-29T09:06:30.863362700: Was here
+
+2023-03-29T09:06:30.866752800: {
+   "communication": {
+      "circuit": "UART",
+      "visualisation": "WebSocket",
+      "server": "WebSocket"
+   },
+   "generatorSetting": {
+      "cellCount": "8",
+      "id": "0",
+      "uinChip": "HHO2020B"
+   },
+   "logSettings": {
+      "logType": "Console",
+      "logLevel": "3",
+      "logPath": "C:\\Users\\golqm\\Documents\\HydroGenera\\HydroGeneraSingleAEM\\Project-HydroGenera\\Logger\\log.txt"
+   },
+   "localDataSettings": {
+      "dataLifespan": "7",
+      "fileFormat": "csv",
+      "path": "C:\\Users\\golqm\\Documents\\HydroGenera\\Data"
+   },
+   "uartSetting": {
+      "port": "COM13",
+      "baudRate": "9600",
+      "dataBits": "9",
+      "stopBits": "1",
+      "parity": "0"
+   },
+   "serverSettings": {
+      "url": "ws://socket.statistics.green-innovation.bg"
+   }
+}
+
+2023-03-29T09:07:00.740321500: Exception: java.io.FileNotFoundException: Data\timestamp2023-03-29 09-07-00.70.csv (The system cannot find the path specified)
+
+2023-03-29T09:07:03.627921700: Was here
+
+2023-03-29T09:07:03.640160100: {
+   "communication": {
+      "circuit": "UART",
+      "visualisation": "WebSocket",
+      "server": "WebSocket"
+   },
+   "generatorSetting": {
+      "cellCount": "8",
+      "id": "0",
+      "uinChip": "HHO2020B"
+   },
+   "logSettings": {
+      "logType": "Console",
+      "logLevel": "3",
+      "logPath": "C:\\Users\\golqm\\Documents\\HydroGenera\\HydroGeneraSingleAEM\\Project-HydroGenera\\Logger\\log.txt"
+   },
+   "localDataSettings": {
+      "dataLifespan": "7",
+      "fileFormat": "csv",
+      "path": "C:\\Users\\golqm\\Documents\\HydroGenera\\Data"
+   },
+   "uartSetting": {
+      "port": "COM13",
+      "baudRate": "9600",
+      "dataBits": "9",
+      "stopBits": "1",
+      "parity": "0"
+   },
+   "serverSettings": {
+      "url": "ws://socket.statistics.green-innovation.bg"
+   }
+}
+
+2023-03-29T09:07:03.653348400: {}
+

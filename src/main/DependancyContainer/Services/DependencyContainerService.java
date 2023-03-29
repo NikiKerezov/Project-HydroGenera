@@ -46,20 +46,20 @@ public class DependencyContainerService {
 
         switch (dependencies.getLocalDataSettings().getFileFormat()){
             case "csv":
-                SaveToCsv.setInstance(dependencies.getLocalDataSettings().getPath(),dependencies.getLocalDataSettings().getDataLifespan(), ConsoleLogger.getInstance());
+                SaveToCsv.setInstance(dependencies.getLocalDataSettings().getPath(),dependencies.getLocalDataSettings().getDataLifespan(), container.getLogger());
                 container.setFileStorage(SaveToCsv.getInstance());
                 break;
         }
 
         switch (dependencies.getCommunicationProtocol().getServer()){
             case "WebSocket":
-                DataRiverCommunication.setInstance(dependencies.getServerSettings().getUrl(), ConsoleLogger.getInstance(), dependencies.getGeneratorSetting().getId());
+                DataRiverCommunication.setInstance(dependencies.getServerSettings().getUrl(), container.getLogger(), dependencies.getGeneratorSetting().getId());
                 container.setDataRiver(DataRiverCommunication.getInstance());
                 break;
         }
         switch (dependencies.getCommunicationProtocol().getVisualisation()){
             case "WebSocket":
-                container.setOnSite(OnSiteCommunication.getInstance(ConsoleLogger.getInstance()));
+                container.setOnSite(OnSiteCommunication.getInstance(container.getLogger()));
                 break;
         }
         return container;

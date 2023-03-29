@@ -26,27 +26,6 @@ class SaveToCsvTest {
         System.out.println("createFolder");
     }
 
-    //proverka dali zapisva pravilnite danni
-    /*@Test
-    void testValuesOfFile() throws IOException {
-        // Create a test DataPackage
-        DataPackage testDataPackage = new DataPackage(10, "nz", 1, 2, 3, 4, 5);
-
-        // Call the saveToFile method
-        saveToCsv.saveToFile(testDataPackage);
-
-        // Get the name of the file that was saved
-        String fileName = saveToCsv.getFileName();
-
-        // Read the contents of the file
-        String filePath = testFilePath + fileName;
-        String fileContents = Files.readString(Paths.get(filePath));
-
-        // Check if the file contents match the expected output
-        String expectedOutput = "10,nz,1.0,2.0,3.0,4.0,5.0";
-        assertEquals(expectedOutput, fileContents.trim());
-    }*/
-
     @Test
     void testSaveToFile() throws IOException {
         // empty folder
@@ -56,7 +35,7 @@ class SaveToCsvTest {
         }
 
         for (int i = 0; i < 3; i++) {
-            DataPackage testDataPackage = new DataPackage(10, "nz", 1, 2, 3, 4, 5, "12");
+            DataPackage testDataPackage = new DataPackage(10, "nz", 1, 2, 3, 4, 5, "12", "12");
             saveToCsv.saveToFile(testDataPackage);
             String fileName = saveToCsv.getFileName();
             System.out.println(fileName);

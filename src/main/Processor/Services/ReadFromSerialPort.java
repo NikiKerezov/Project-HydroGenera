@@ -60,14 +60,14 @@ public class ReadFromSerialPort implements IReadFromSerialPort {
             InputStream in = serialPort.getInputStream();
 
             if (serialPort.isOpen()) {
-                System.out.println("Port is open");
+                logger.log("Port is open",1);
             }
             else {
-                throw new RuntimeException("Port is not open");
+                logger.log("Port is not open", 1);
             }
             ArrayList<Character> input = new ArrayList<Character>();
 
-            System.out.println("Opened port: " + serialPort.getSystemPortName());
+            logger.log("Opened port: " + serialPort.getSystemPortName(), 1);
 
             //clear buffer
 
@@ -85,7 +85,7 @@ public class ReadFromSerialPort implements IReadFromSerialPort {
                     if ((numRead == 0x0a && input.size() != 16 && flag == 0)) {
                         flag = 1;
                         input.clear();
-                        //logger.log("Clearing buffer", 3);
+                        logger.log("Clearing buffer", 2);
                         continue;
                     }
 
@@ -93,6 +93,7 @@ public class ReadFromSerialPort implements IReadFromSerialPort {
                         && input.get(14) == 0x0d
                         && input.get(15) == 0x0a) {
 
+                        logger.log("Went trough check", 3);
                         flag = 0;
 
                         DataPackage dataPackage = processPackage.processPackage(input);
@@ -100,15 +101,17 @@ public class ReadFromSerialPort implements IReadFromSerialPort {
                         EventEmitter.getInstance().setDataPackage(dataPackage);
                         EventEmitter.getInstance().notifyAllObservers(dataPackage);
 
-                        //printDataPackage.printPackage(dataPackage);
-                    }
-
-                    if (input.size() >= 16) {
+                        logger.log(dataPackage.toString(), 3);
                         input.clear();
                     }
 
+//                    if (input.size() >= 16) {
+//                        logger.log("Clearing buffer", 2);
+//                        input.clear();
+//                    }
+
                 } catch (Exception exception) {
-                    //logger.log("Exception throws: " + exception.getMessage(), 1);
+                    logger.log("Exception throws: " + exception.getMessage(), 1);
                 }
         }
     }

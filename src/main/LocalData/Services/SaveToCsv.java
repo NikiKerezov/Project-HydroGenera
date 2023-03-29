@@ -20,7 +20,7 @@ public class SaveToCsv extends Observer implements ISaveToFile {
     private final long lifespan_in_days;
     private static File directory;
     private String fileName;
-    private OutputStreamWriter writer = null;
+    private OutputStreamWriter writer;
     private ILogger logger;
 
     //s
@@ -33,6 +33,7 @@ public class SaveToCsv extends Observer implements ISaveToFile {
 
     public static void setInstance(String path, int lifespan_in_days, ILogger logger) throws IOException {
         instance = new SaveToCsv(path, lifespan_in_days, logger);
+
     }
 
     private SaveToCsv(String path, int lifespan_in_days, ILogger logger) throws IOException {
@@ -42,7 +43,6 @@ public class SaveToCsv extends Observer implements ISaveToFile {
 
         checkAndDeleteOldFiles(path);
 
-        //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss.ms");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss.ms");
         String currentTimestamp = sdf.format(new Date());
         fileName = "timestamp" + currentTimestamp + ".csv";
@@ -50,7 +50,7 @@ public class SaveToCsv extends Observer implements ISaveToFile {
             File file = new File(path, fileName);
             writer = new OutputStreamWriter(new FileOutputStream(file), "UTF-8");
         } catch (IOException e) {
-            logger.log("Exception: "+e, 1);
+            this.logger.log("Exception: "+e, 1);
         }
     }
 

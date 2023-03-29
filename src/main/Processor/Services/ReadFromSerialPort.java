@@ -102,12 +102,13 @@ public class ReadFromSerialPort implements IReadFromSerialPort {
                         EventEmitter.getInstance().notifyAllObservers(dataPackage);
 
                         logger.log(dataPackage.toString(), 3);
-                    }
-
-                    if (input.size() >= 16) {
-                        logger.log("Clearing buffer", 2);
                         input.clear();
                     }
+
+//                    if (input.size() >= 16) {
+//                        logger.log("Clearing buffer", 2);
+//                        input.clear();
+//                    }
 
                 } catch (Exception exception) {
                     logger.log("Exception throws: " + exception.getMessage(), 1);

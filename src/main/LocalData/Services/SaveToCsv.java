@@ -20,7 +20,7 @@ public class SaveToCsv extends Observer implements ISaveToFile {
     private final long lifespan_in_days;
     private static File directory;
     private String fileName;
-    private OutputStreamWriter writer = null;
+    private OutputStreamWriter writer;
     private ILogger logger;
 
     //s
@@ -33,6 +33,7 @@ public class SaveToCsv extends Observer implements ISaveToFile {
 
     public static void setInstance(String path, int lifespan_in_days, ILogger logger) throws IOException {
         instance = new SaveToCsv(path, lifespan_in_days, logger);
+
     }
 
     private SaveToCsv(String path, int lifespan_in_days, ILogger logger) throws IOException {

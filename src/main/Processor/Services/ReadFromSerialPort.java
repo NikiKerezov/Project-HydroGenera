@@ -60,10 +60,10 @@ public class ReadFromSerialPort implements IReadFromSerialPort {
             InputStream in = serialPort.getInputStream();
 
             if (serialPort.isOpen()) {
-                System.out.println("Port is open");
+                logger.log("Port is open",1);
             }
             else {
-                throw new RuntimeException("Port is not open");
+                logger.log("Port is not open", 1);
             }
             ArrayList<Character> input = new ArrayList<Character>();
 
@@ -85,7 +85,7 @@ public class ReadFromSerialPort implements IReadFromSerialPort {
                     if ((numRead == 0x0a && input.size() != 16 && flag == 0)) {
                         flag = 1;
                         input.clear();
-                        logger.log("Clearing buffer", 3);
+                        logger.log("Clearing buffer", 2);
                         continue;
                     }
 
@@ -93,6 +93,7 @@ public class ReadFromSerialPort implements IReadFromSerialPort {
                         && input.get(14) == 0x0d
                         && input.get(15) == 0x0a) {
 
+                        logger.log("Went trough check", 3);
                         flag = 0;
 
                         DataPackage dataPackage = processPackage.processPackage(input);
@@ -104,7 +105,7 @@ public class ReadFromSerialPort implements IReadFromSerialPort {
                     }
 
                     if (input.size() >= 16) {
-                        logger.log("Clearing buffer", 3);
+                        logger.log("Clearing buffer", 2);
                         input.clear();
                     }
 

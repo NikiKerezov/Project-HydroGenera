@@ -27,7 +27,7 @@ public class DependencyContainerService {
                 container.setLogger(ConsoleLogger.getInstance());
                 break;
             case "File":
-                TxtLogger.setInstance(dependencies.getLogSettings().getLogLevel(), dependencies.getLogSettings().getLogPath());
+                TxtLogger.setInstance(dependencies.getLogSettings().getLogLevel(), dependencies.getLogSettings().getLogPath(), 7);
                 container.setLogger(TxtLogger.getInstance());
                 break;
         }

@@ -18,7 +18,7 @@ public class LogTests {
     @BeforeEach
     public void setUp() {
 
-        TxtLogger.setInstance(3, "test.txt");
+        TxtLogger.setInstance(3, "test.txt", 1);
         txtLogger = TxtLogger.getInstance();
     }
 

@@ -11,7 +11,6 @@ public class Startup {
         EventEmitter.getInstance().attach(container.getFileStorage());
        // EventEmitter.getInstance().attach(container.getDataRiver());
         EventEmitter.getInstance().attach(container.getOnSite());
-
         Thread server = new Thread(() -> {
             try {
                container.getOnSite().startServer();

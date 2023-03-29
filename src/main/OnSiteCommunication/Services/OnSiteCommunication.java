@@ -6,6 +6,7 @@ import Logger.Contracts.ILogger;
 import OnSiteCommunication.Contracts.IOnSiteCommunication;
 import io.socket.client.IO;
 import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -84,16 +85,13 @@ public class OnSiteCommunication extends Observer implements IOnSiteCommunicatio
     }
 
     public void startListening() {
+
         socket.on("new_setting", (data) -> {
-            System.out.println("New setting received: " + data.toString());
-            JSONObject jsonData = new JSONObject(data);
             try {
-                logger.log(jsonData.toString(), 1);
+                logger.log("New setting received: " + data[0].toString(), 1);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-//            receiveJson(jsonData);
-            socket.emit("new_setting", data);
         });
     }
 }

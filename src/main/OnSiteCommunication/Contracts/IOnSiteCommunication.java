@@ -9,5 +9,4 @@ import java.io.IOException;
 public interface IOnSiteCommunication extends IObserver {
     void sendPackage(DataPackage dataPackage) throws IOException;
     void startServer();
-    void receiveJson(JSONObject data);
 }

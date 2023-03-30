@@ -52,6 +52,7 @@ class SaveToCsvTest {
         String fileContents = Files.readString(Paths.get(filePath));
 
         // Check if the file contents match the expected output
-        String expectedOutput = "10,nz,1.0,2.0,3.0,4.0,5.0";
+        String expectedOutput = "10,nz,1.0,2.0,3.0,4.0,5.0,12,12";
+        assertEquals(expectedOutput, fileContents);
     }
 }

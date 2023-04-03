@@ -82,7 +82,7 @@ public class ReadFromSerialPort implements IReadFromSerialPort {
                     Character numRead = (char) in.read();
                     input.add(numRead);
 
-                    if ((numRead == 0x0a && input.size() != 16 && flag == 0)) {
+                    if (numRead == 0x0a && input.size() != 16) {
                         flag = 1;
                         input.clear();
                         logger.log("Clearing buffer", 2);

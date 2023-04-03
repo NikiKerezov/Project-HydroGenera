@@ -29,6 +29,7 @@ public class OnSiteCommunication extends Observer implements IOnSiteCommunicatio
     private OnSiteCommunication(ILogger logger) throws URISyntaxException {
         this.logger = logger;
         socket = IO.socket("ws://localhost:3000");
+        this.connect();
     }
     public static OnSiteCommunication getInstance(ILogger logger) throws Exception {
         if (instance == null) {
@@ -83,7 +84,7 @@ public class OnSiteCommunication extends Observer implements IOnSiteCommunicatio
 
         }
         catch (Exception e){
-            logger.log("Exception throws: " + e.getMessage(), 1);
+            logger.log("Exception throws: " + e, 1);
         }
     }
 
@@ -104,6 +105,7 @@ public class OnSiteCommunication extends Observer implements IOnSiteCommunicatio
         } catch (IOException e) {
             System.err.println("Error while saving setting to file: " + e.getMessage());
         }*/
+
         try {
             String filePath = "data.json";
             Path path = Paths.get(filePath);
@@ -134,6 +136,27 @@ public class OnSiteCommunication extends Observer implements IOnSiteCommunicatio
             try {
                 logger.log("New setting received: " + data[0].toString(), 1);
                 receiveJson(data[0].toString());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        socket.on(Socket.EVENT_CONNECT_ERROR, (data) ->{
+            try {
+                logger.log("Connection error", 1);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        socket.on(Socket.EVENT_DISCONNECT, (data) ->{
+            try {
+                logger.log("Disconnected", 1);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        socket.on(Socket.EVENT_CONNECT, (data) ->{
+            try {
+                logger.log("Connected", 1);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

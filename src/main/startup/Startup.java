@@ -10,21 +10,21 @@ public class Startup {
         ServiceContainer container = ServiceContainer.container();
         EventEmitter.getInstance().attach(container.getFileStorage());
        // EventEmitter.getInstance().attach(container.getDataRiver());
-        EventEmitter.getInstance().attach(container.getOnSite());
-        Thread server = new Thread(() -> {
-            try {
-               container.getOnSite().startServer();
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        });
-        Thread client = new Thread(() -> {
-            try {
-                container.getDataRiver().connect();
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        });
+       EventEmitter.getInstance().attach(container.getOnSite());
+//        Thread server = new Thread(() -> {
+//            try {
+//               container.getOnSite().startServer();
+//            } catch (Exception e) {
+//                throw new RuntimeException(e);
+//            }
+//        });
+//        Thread client = new Thread(() -> {
+//            try {
+//                container.getDataRiver().connect();
+//            } catch (Exception e) {
+//                throw new RuntimeException(e);
+//            }
+//        });
 
         Thread writeTime = new Thread(){
             public void run(){

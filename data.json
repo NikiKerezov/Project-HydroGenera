@@ -24,7 +24,7 @@
   },
 
   "uartSetting":{
-    "port": "COM7",
+    "port": "COM8",
     "baudRate": 9600,
     "dataBits": 8,
     "stopBits": 1,

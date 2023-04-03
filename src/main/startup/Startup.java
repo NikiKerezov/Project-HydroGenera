@@ -40,8 +40,8 @@ public class Startup {
         };
 
         writeTime.start();
-
-        server.start();
+       // container.getOnSite().startServer();
+        //server.start();
         //client.start();
         container.getSerialPort().ReadAndProcess();
 
